@@ -24,7 +24,7 @@ class LoginController extends AbstractController
 
 
         if ($user && $user->getPassword() === $password) {
-            return new JsonResponse(['token' => 'votre-token-jwt'], 200);
+            return new JsonResponse(['message' => 'Bienvenu'], 200);
         } else {
             return new JsonResponse(['message' => 'Identifiant ou mot de passe incorrect'], 401);
         }
