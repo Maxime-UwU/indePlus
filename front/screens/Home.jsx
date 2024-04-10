@@ -13,32 +13,50 @@ const Home = () => {
     <SafeAreaView style={styles.backgroundStyle}>
       <ScrollView
         style={styles.backgroundStyle}>
-        <View >
-          <Text onPress="">Les nouveaux jeux →</Text> 
-          <View style={styles.line}>
-            <ScrollView horizontal="true">
-              <View onPress="" style={styles.gameCard}>
-                <Image style={styles.gameCardImage} source={require('./../images/spellswapthumbnail.jpg')}></Image>
-                <Text>Nom du jeu</Text>
-                <Text>Nom du studio</Text>
-                <View style={styles.line}>
-                  <Image></Image>
-                  <Image></Image>
+        <View  style={styles.fullPage}>
+          <View>
+            <Text style={styles.title}>Les nouveaux jeux →</Text> 
+            <View style={styles.line}>
+              <ScrollView horizontal="true">
+                <View onPress="" style={styles.gameCard}>
+                  <Image style={styles.imageCard} source={require('./../images/spellswapthumbnail.jpg')}></Image>
+                  <Text style={styles.titleCard}>Spell Swap</Text>
+                  <Text style={styles.textCard}>Teagher studio</Text>
+                  <View style={styles.line}>
+                    <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                    <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                  </View>
                 </View>
-              </View>
-            </ScrollView>
+              </ScrollView>
+            </View>
           </View>
-        </View>
-        <View >
-          <Text onPress="">Des studios partenaires →</Text> 
-          <View style={styles.line}>
-            <ScrollView horizontal="true">
-              <View onPress="" style={styles.studioCard}>
-                <Image></Image>
-                <Text>Nom du studio</Text>
-                <Text>Description</Text>
-              </View>
-            </ScrollView>
+          <View>
+            <Text style={styles.title}>Des studios partenaires →</Text> 
+            <View style={styles.line}>
+              <ScrollView horizontal="true">
+                <View onPress="" style={styles.studioCard}>
+                  <Image style={styles.imageCard}  source={require('./../images/teagherStudio.jpg')}></Image>
+                  <Text style={styles.titleCard}>Nom du studio</Text>
+                  <Text style={styles.textCard}>Description</Text>
+                </View>
+              </ScrollView>
+            </View>
+          </View>
+          <View>
+            <Text style={styles.title}>Vous aimerez peut-être →</Text> 
+            <View style={styles.line}>
+              <ScrollView horizontal="true">
+                <View onPress="" style={styles.gameCard}>
+                  <Image style={styles.imageCard} source={require('./../images/spellswapthumbnail.jpg')}></Image>
+                  <Text style={styles.titleCard}>Spell Swap</Text>
+                  <Text style={styles.textCard}>Teagher studio</Text>
+                  <View style={styles.line}>
+                    <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                    <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                  </View>
+                </View>
+              </ScrollView>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -70,6 +88,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row'
   },
+  title: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  fullPage: {
+    paddingTop: 75,
+    paddingBottom: 75
+  },
   gameCard: {
     width: '50%',
     borderRadius: 10,
@@ -80,11 +107,39 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
-  gameCardImage: {
+  imageCard: {
     width: 'auto',
     height: 100,
-    resizeMode: 'stretched',
+    resizeMode: 'cover',
     borderRadius: 10
+  },
+  titleCard: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  textCard: {
+    color: 'white'
+  },
+  logoCard: {
+    width: 20,
+    height: 20,
+    resizeMode: 'center',
+    marginRight: 10,
+    marginTop: 5,
+    backgroundColor: 'white',
+    borderRadius: 1000,
+    // padding: 100,
+  },
+  studioCard: {
+    width: '50%',
+    borderRadius: 10,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: 20,
+    marginTop: 20,
+    marginBottom: 20,
   }
 });
 
