@@ -32,12 +32,6 @@ class Game
     #[ORM\Column(nullable: true)]
     private ?array $comment = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $tags = null;
-
-    #[ORM\Column]
-    private array $plateform = [];
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $releaseDate = null;
 
@@ -46,6 +40,12 @@ class Game
      */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favGames')]
     private Collection $users;
+
+    #[ORM\Column(length: 255)]
+    private ?string $tags = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $plateform = null;
 
     public function __construct()
     {
@@ -117,30 +117,6 @@ class Game
         return $this;
     }
 
-    public function getTags(): ?array
-    {
-        return $this->tags;
-    }
-
-    public function setTags(?array $tags): static
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    public function getPlateform(): array
-    {
-        return $this->plateform;
-    }
-
-    public function setPlateform(array $plateform): static
-    {
-        $this->plateform = $plateform;
-
-        return $this;
-    }
-
     public function getReleaseDate(): ?\DateTimeInterface
     {
         return $this->releaseDate;
@@ -176,6 +152,30 @@ class Game
         if ($this->users->removeElement($user)) {
             $user->removeFavGame($this);
         }
+
+        return $this;
+    }
+
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    public function setTags(string $tags): static
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getPlateform(): ?string
+    {
+        return $this->plateform;
+    }
+
+    public function setPlateform(string $plateform): static
+    {
+        $this->plateform = $plateform;
 
         return $this;
     }

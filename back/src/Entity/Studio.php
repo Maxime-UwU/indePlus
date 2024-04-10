@@ -22,9 +22,6 @@ class Studio
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
-
     #[ORM\Column(nullable: true)]
     private ?array $comment = null;
 
@@ -58,6 +55,9 @@ class Studio
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favStudios')]
     private Collection $users;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -89,18 +89,6 @@ class Studio
     public function setImage(string $image): static
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }
@@ -242,6 +230,18 @@ class Studio
         if ($this->users->removeElement($user)) {
             $user->removeFavStudio($this);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
