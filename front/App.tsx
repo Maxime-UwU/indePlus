@@ -1,11 +1,19 @@
 import React from 'react';
-import Login from './screens/Login';
+import {SafeAreaView} from 'react-native';
+import Routes from './Routes'; 
+import {NavigationContainer} from '@react-navigation/native';
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <Login />
+    <SafeAreaView style={{flex: 1}}>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+      {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+        {}
+      </KeyboardAvoidingView> */}
+    </SafeAreaView>
   );
-}
+};
 
 export default App;
-
