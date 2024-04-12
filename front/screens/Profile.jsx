@@ -43,7 +43,7 @@ const Profile = () => {
             </View>
             <Text style={styles.title}>Description</Text>
             <TextInput style={styles.multiline} value={description} multiline></TextInput>
-            <TouchableOpacity style={styles.sendButton}><Image source={require("./../images/send.png")}></Image></TouchableOpacity>
+            <TouchableOpacity style={styles.sendButton}><Image style={styles.sendButtonImage} source={require("./../images/send.png")}></Image></TouchableOpacity>
             <TextInput value={x}></TextInput>
             <TextInput value={facebook}></TextInput>
             <TextInput value={instagram}></TextInput>
@@ -56,7 +56,29 @@ const Profile = () => {
 }
 
 const styles = StyleSheet.create({
-
+    backgroundStyle: {
+        backgroundColor: '#4D2672'
+    },
+    line: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    hiddenfield: {
+        display: 'none'
+    },
+    title: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: 'white'
+    },
+    sendButton: {
+        width: 10,
+        height: 'auto'
+    },
+    sendButtonImage: {
+        width: 'auto',
+        height: 10,
+    }
 });
 
 export default Profile;
