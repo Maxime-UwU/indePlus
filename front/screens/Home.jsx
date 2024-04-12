@@ -32,7 +32,6 @@ const Home = () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/game');
       setGames(response.data);
-      console.log(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
         console.error('Error:', error.response.data);
