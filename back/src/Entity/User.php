@@ -7,35 +7,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_UUID', fields: ['uuid'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
-    private ?string $uuid = null;
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column]
-    private array $roles = [];
-
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $tags = null;
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'users')]
+    private Collection $tag;
 
     /**
      * @var Collection<int, Game>
@@ -47,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Studio>
      */
     #[ORM\ManyToMany(targetEntity: Studio::class, inversedBy: 'users')]
-    private Collection $favStudios;
+    private Collection $favStudio;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $notif = null;
@@ -55,13 +46,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $joinDate = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
-
     public function __construct()
     {
+        $this->tag = new ArrayCollection();
         $this->favGames = new ArrayCollection();
-        $this->favStudios = new ArrayCollection();
+        $this->favStudio = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,56 +58,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getUuid(): ?string
+    public function getUsername(): ?string
     {
-        return $this->uuid;
+        return $this->username;
     }
 
-    public function setUuid(string $uuid): static
+    public function setUsername(string $username): static
     {
-        $this->uuid = $uuid;
+        $this->username = $username;
 
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->uuid;
-    }
-
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    /**
-     * @param list<string> $roles
-     */
-    public function setRoles(array $roles): static
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -131,22 +83,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @see UserInterface
+     * @return Collection<int, Tag>
      */
-    public function eraseCredentials(): void
+    public function getTag(): Collection
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        return $this->tag;
     }
 
-    public function getTags(): ?array
+    public function addTag(Tag $tag): static
     {
-        return $this->tags;
+        if (!$this->tag->contains($tag)) {
+            $this->tag->add($tag);
+        }
+
+        return $this;
     }
 
-    public function setTags(?array $tags): static
+    public function removeTag(Tag $tag): static
     {
-        $this->tags = $tags;
+        $this->tag->removeElement($tag);
 
         return $this;
     }
@@ -178,15 +133,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Studio>
      */
-    public function getFavStudios(): Collection
+    public function getFavStudio(): Collection
     {
-        return $this->favStudios;
+        return $this->favStudio;
     }
 
     public function addFavStudio(Studio $favStudio): static
     {
-        if (!$this->favStudios->contains($favStudio)) {
-            $this->favStudios->add($favStudio);
+        if (!$this->favStudio->contains($favStudio)) {
+            $this->favStudio->add($favStudio);
         }
 
         return $this;
@@ -194,7 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeFavStudio(Studio $favStudio): static
     {
-        $this->favStudios->removeElement($favStudio);
+        $this->favStudio->removeElement($favStudio);
 
         return $this;
     }
@@ -219,18 +174,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setJoinDate(\DateTimeInterface $joinDate): static
     {
         $this->joinDate = $joinDate;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
 
         return $this;
     }
