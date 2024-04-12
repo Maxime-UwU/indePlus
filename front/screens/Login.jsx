@@ -34,9 +34,9 @@ const Login = () => {
           <Pressable onPress={handleLogin} style={styles.button}> 
           <Text style={styles.beigeButton}>Se Connecter</Text> 
           </Pressable>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.loginRedirection}>Not yet registered? Click here!</Text>
-          </TouchableOpacity>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Register')}> */}
+          <Text style={styles.loginRedirection}>Pas encore inscrit? Cliquez ici!</Text>
+          {/* </TouchableOpacity> */}
         </View>
       </View>
     </SafeAreaView>
