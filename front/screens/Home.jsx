@@ -60,12 +60,12 @@ const Home = () => {
                 data={games}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={""} style={styles.gameCard}>
-                    <Image style={styles.imageCard} source={require('./../images/teagherStudio.jpg')}/>
+                    <Image style={styles.imageCard} source={require('./../components/images/teagherStudio.jpg')}/>
                     <Text style={styles.titleCard}>{item.name}</Text>
                     <Text style={styles.textCard} numberOfLines={2}>{item.description}</Text>
                     <View style={styles.line}>
-                      <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
-                      <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
+                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
                     </View>
                   </TouchableOpacity>
                 )}
@@ -81,7 +81,7 @@ const Home = () => {
                 data={studios}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={""} style={styles.studioCard}>
-                    <Image style={styles.imageCard} source={require('./../images/teagherStudio.jpg')}></Image>
+                    <Image style={styles.imageCard} source={require('./../components/images/teagherStudio.jpg')}></Image>
                     <Text style={styles.titleCard}>{item.name}</Text>
                     <Text numberOfLines={2} style={styles.textCard}>{item.description}</Text>
                   </TouchableOpacity>
@@ -96,9 +96,9 @@ const Home = () => {
               <FlatList
                 horizontal
                 data={[
-                  { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../images/spellswapthumbnail.jpg') },
-                  { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../images/spellswapthumbnail.jpg') },
-                  { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../images/spellswapthumbnail.jpg') }
+                  { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../components/images/spellswapthumbnail.jpg') },
+                  { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../components/images/spellswapthumbnail.jpg') },
+                  { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
                 ]}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={""} style={styles.gameCard}>
@@ -106,8 +106,8 @@ const Home = () => {
                     <Text style={styles.titleCard}>{item.title}</Text>
                     <Text style={styles.textCard}>{item.studio}</Text>
                     <View style={styles.line}>
-                      <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
-                      <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
+                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
                     </View>
                   </TouchableOpacity>
                 )}
