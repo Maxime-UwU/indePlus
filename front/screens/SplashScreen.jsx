@@ -1,31 +1,30 @@
 import React from 'react';
+import styles from './../components/styles/style';
 import {
   SafeAreaView,
-  StyleSheet,
   Text,
   View,
   Image,
   FlatList,
-  TouchableOpacity,
   TextInput,
-  Button
+  Pressable
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Home = () => {
+const SplashScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-        <Image source={require("./../components/images/logo-transparent-png.png")}></Image>
-        <View>
-            <Text>Quel genre de jeu vous intéresse?</Text>
-            <TextInput></TextInput>
-            <Button><Text>Go!</Text></Button>
+        <View style={styles.formAuth}>
+            <Image source={require('./../components/images/logo-transparent-png.png')} style={styles.logo} />
+            <Text style={styles.infoApp}>Toute l’actu des jeux vidéo indépendants sur votre mobile</Text>
+            <Pressable onPress={() => navigation.navigate('SplashScreen2')}>
+                <Text style={styles.bigBeigeButton}>Go!</Text>
+            </Pressable>
         </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-
-});
-
-export default Home;
+export default SplashScreen;

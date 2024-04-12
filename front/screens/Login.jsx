@@ -17,7 +17,7 @@ const Login = () => {
       });
 
       console.log('Success:', response.data);
-      navigation.navigate('Home');
+      navigation.navigate('SplashScreen');
     } catch (error) {
       console.error('Error:', 'wrong');
       Alert.alert('Erreur', 'Identifiant ou mot de passe incorrect');

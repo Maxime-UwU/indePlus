@@ -31,6 +31,15 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: 200,
   },
+	bigBeigeButton: {
+		backgroundColor: '#FAEBD7',
+		color: '#4D2673',
+		padding: 15,
+		borderRadius: 30,
+		fontWeight: '700',
+		textAlign: 'center',
+		width: 80
+	},
 	beigeButton: {
 		backgroundColor: '#FAEBD7',
 		color: '#4D2673',
@@ -94,7 +103,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 20,
     marginBottom: 20,
-  }
+  },
+	infoApp: {
+		fontSize: 30,
+		fontWeight: '700',
+		textAlign: 'center',
+		margin: 10,
+		color: 'white',
+	},
 });
 
 export default styles;
