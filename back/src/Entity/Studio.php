@@ -22,17 +22,17 @@ class Studio
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
     private ?array $comment = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $linkX = null;
+    private ?string $urlX = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $urlInsta = null;
+    private ?string $UrlInsta = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $urlFacebook = null;
@@ -49,13 +49,13 @@ class Studio
     /**
      * @var Collection<int, Game>
      */
-    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'studio')]
+    #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'studio')]
     private Collection $games;
 
     /**
      * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favStudios')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favStudio')]
     private Collection $users;
 
     public function __construct()
@@ -117,26 +117,26 @@ class Studio
         return $this;
     }
 
-    public function getLinkX(): ?string
+    public function getUrlX(): ?string
     {
-        return $this->linkX;
+        return $this->urlX;
     }
 
-    public function setLinkX(?string $linkX): static
+    public function setUrlX(?string $urlX): static
     {
-        $this->linkX = $linkX;
+        $this->urlX = $urlX;
 
         return $this;
     }
 
     public function getUrlInsta(): ?string
     {
-        return $this->urlInsta;
+        return $this->UrlInsta;
     }
 
-    public function setUrlInsta(?string $urlInsta): static
+    public function setUrlInsta(?string $UrlInsta): static
     {
-        $this->urlInsta = $urlInsta;
+        $this->UrlInsta = $UrlInsta;
 
         return $this;
     }
@@ -197,23 +197,20 @@ class Studio
         return $this->games;
     }
 
-    public function addGames(Game $games): static
+    public function addGame(Game $game): static
     {
-        if (!$this->games->contains($games)) {
-            $this->games->add($games);
-            $games->setStudio($this);
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
+            $game->addStudio($this);
         }
 
         return $this;
     }
 
-    public function removeGames(Game $games): static
+    public function removeGame(Game $game): static
     {
-        if ($this->games->removeElement($games)) {
-            // set the owning side to null (unless already changed)
-            if ($games->getStudio() === $this) {
-                $games->setStudio(null);
-            }
+        if ($this->games->removeElement($game)) {
+            $game->removeStudio($this);
         }
 
         return $this;

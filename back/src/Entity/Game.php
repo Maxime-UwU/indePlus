@@ -19,24 +19,32 @@ class Game
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'games')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Studio $studio = null;
+    /**
+     * @var Collection<int, Studio>
+     */
+    #[ORM\ManyToMany(targetEntity: Studio::class, inversedBy: 'games')]
+    private Collection $studio;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $comment = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $comment = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $tags = null;
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'games')]
+    private Collection $tag;
 
-    #[ORM\Column]
-    private array $plateform = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $plateform = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $launcher = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $releaseDate = null;
@@ -49,6 +57,8 @@ class Game
 
     public function __construct()
     {
+        $this->studio = new ArrayCollection();
+        $this->tag = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -69,14 +79,26 @@ class Game
         return $this;
     }
 
-    public function getStudio(): ?Studio
+    /**
+     * @return Collection<int, Studio>
+     */
+    public function getStudio(): Collection
     {
         return $this->studio;
     }
 
-    public function setStudio(?Studio $studio): static
+    public function addStudio(Studio $studio): static
     {
-        $this->studio = $studio;
+        if (!$this->studio->contains($studio)) {
+            $this->studio->add($studio);
+        }
+
+        return $this;
+    }
+
+    public function removeStudio(Studio $studio): static
+    {
+        $this->studio->removeElement($studio);
 
         return $this;
     }
@@ -105,38 +127,62 @@ class Game
         return $this;
     }
 
-    public function getComment(): ?array
+    public function getComment(): ?string
     {
         return $this->comment;
     }
 
-    public function setComment(?array $comment): static
+    public function setComment(?string $comment): static
     {
         $this->comment = $comment;
 
         return $this;
     }
 
-    public function getTags(): ?array
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
     {
-        return $this->tags;
+        return $this->tag;
     }
 
-    public function setTags(?array $tags): static
+    public function addTag(Tag $tag): static
     {
-        $this->tags = $tags;
+        if (!$this->tag->contains($tag)) {
+            $this->tag->add($tag);
+        }
 
         return $this;
     }
 
-    public function getPlateform(): array
+    public function removeTag(Tag $tag): static
+    {
+        $this->tag->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getPlateform(): ?string
     {
         return $this->plateform;
     }
 
-    public function setPlateform(array $plateform): static
+    public function setPlateform(?string $plateform): static
     {
         $this->plateform = $plateform;
+
+        return $this;
+    }
+
+    public function getLauncher(): ?string
+    {
+        return $this->launcher;
+    }
+
+    public function setLauncher(?string $launcher): static
+    {
+        $this->launcher = $launcher;
 
         return $this;
     }

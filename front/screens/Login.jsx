@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: '#4D2672', flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ScrollView keyboardShouldPersistTaps={'handled'} contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Image source={require('./../components/images/logo-transparent-svg.svg')} style={{ width: 100, height: 100, marginBottom: 20 }} />
         <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} />
         <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry={true} style={styles.input} />
