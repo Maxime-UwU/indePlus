@@ -29,11 +29,11 @@ const Login = () => {
         <Image source={require('./../components/images/logo-transparent-svg.svg')} style={{ width: 100, height: 100, marginBottom: 20 }} />
         <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} />
         <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry={true} style={styles.input} />
-        <Pressable onPress={handleLogin} style={styles.button}> 
+        <Pressable onPress={handleLogin} style={[styles.button, { backgroundColor: '#FAEBD7', marginBottom: 10 }]}>
         <Text style={styles.text}>Connect</Text> 
         </Pressable>
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text style={{ marginTop: 10, color: '#FAEBD7' }}>Not yet registered? Click here!</Text>
+        <Text style={{ backgroundColor: '#FAEBD7', padding: 10, borderRadius: 20, marginBottom: 10 }}>Not yet registered? Click here!</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
