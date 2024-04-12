@@ -16,6 +16,7 @@ const Login = () => {
       });
 
       console.log('Success:', response.data);
+      navigation.navigate('Home');
     } catch (error) {
       console.error('Error:', 'wrong');
       Alert.alert('Erreur', 'Identifiant ou mot de passe incorrect');
@@ -34,7 +35,6 @@ const Login = () => {
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
         <Text style={{ marginTop: 10, color: '#FAEBD7' }}>Not yet registered? Click here!</Text>
         </TouchableOpacity>
-
       </ScrollView>
     </SafeAreaView>
   );

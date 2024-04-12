@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, Button, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Importez useNavigation depuis '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'; 
 
 const Register = () => {
-  const navigation = useNavigation(); // Initialisez la navigation
+  const navigation = useNavigation(); 
 
   const [userType, setUserType] = useState('Joueur');
 
