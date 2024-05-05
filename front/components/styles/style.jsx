@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
+    marginLeft: 20
   },
   fullPage: {
     paddingTop: 75,
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#FAEBD7',
     backgroundColor: "white",
+    color: "black",
     width: 200,
   },
 	bigBeigeButton: {
