@@ -113,6 +113,20 @@ const styles = StyleSheet.create({
 		margin: 10,
 		color: 'white',
 	},
+
+  // TabBar
+
+  tabbar: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    height: 70,
+    backgroundColor: "#FAEBD7",
+  },
+  tabbarText: {
+    color: "#4D2673"
+  }
 });
 
 export default styles;

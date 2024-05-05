@@ -3,13 +3,13 @@ import styles from './../components/styles/style'
 import {
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   View,
   Image,
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import TabBar from '../components/templates/Tabbar';
 
 const Home = () => {
   return (
@@ -90,6 +90,7 @@ const Home = () => {
             </View>
           </View>
         </View>
+        {/* <TabBar/> */}
       </ScrollView>
     </SafeAreaView>
   );
