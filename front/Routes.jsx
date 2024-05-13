@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
 import Home from './screens/Home';
 import Login from './screens/Login';
-import Register from './screens/Register';
+// import Register from './screens/Register';
+import SplashScreen from './screens/SplashScreen';
+import SplashScreen2 from './screens/SplashScreen2';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,19 @@ const Routes = () => {
             },
             headerTintColor: '#fff'
             }}/>
-            <Stack.Screen name="Register" component={Register} headerBackVisible options={{
+            {/* <Stack.Screen name="Register" component={Register} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff'
+            }}/> */}
+            <Stack.Screen name="SplashScreen" component={SplashScreen} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff'
+            }}/>
+            <Stack.Screen name="SplashScreen2" component={SplashScreen2} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },

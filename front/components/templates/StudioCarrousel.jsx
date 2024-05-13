@@ -1,0 +1,32 @@
+import React from 'react';
+import styles from './../styles/style';
+import {
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity
+} from 'react-native';
+
+const StudioCarrousel = props => {
+  return (
+    <View>
+      <Text style={styles.title}>{props.title}</Text> 
+      <FlatList
+      horizontal
+      data={props.studios}
+      renderItem={({ item }) => (
+        <TouchableOpacity onPress={""} style={styles.studioCard}>
+          <Image style={styles.imageCard} source={item.image}></Image>
+          <Text style={styles.titleCard}>{item.name}</Text>
+          <Text numberOfLines={2} style={styles.textCard}>{item.description}</Text>
+        </TouchableOpacity>
+      )}
+      keyExtractor={item => item.id.toString()}
+      ListFooterComponent={<View style={{ marginRight: 20 }} />}
+      />
+    </View>
+  )
+}
+
+export default StudioCarrousel;
