@@ -10,9 +10,24 @@ const Stack = createNativeStackNavigator();
 const Routes = () => {
     return (
         <Stack.Navigator initialRouteName='Login'>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Home" component={Home} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff'
+            }}/>
+            <Stack.Screen name="Login" component={Login} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff'
+            }}/>
+            <Stack.Screen name="Register" component={Register} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff'
+            }}/>
         </Stack.Navigator>
     );
 };
