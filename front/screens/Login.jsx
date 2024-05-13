@@ -26,19 +26,21 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.formAuth}>
-        <Image source={require('./../components/images/logo-transparent-png.png')} style={styles.logo} />
-        <View>
-          <TextInput placeholder="Nom" placeholderTextColor="#4D2673" value={username} onChangeText={setUsername} style={styles.input} />
-          <TextInput placeholder="Mot de passe" placeholderTextColor="#4D2673" value={password} onChangeText={setPassword} secureTextEntry={true} style={styles.input} />
-          <Pressable onPress={handleLogin} style={styles.button}> 
-          <Text style={styles.beigeButton}>Se Connecter</Text> 
-          </Pressable>
-          {/* <TouchableOpacity onPress={() => navigation.navigate('Register')}> */}
-          <Text style={styles.loginRedirection}>Pas encore inscrit? Cliquez ici!</Text>
-          {/* </TouchableOpacity> */}
+      <ScrollView keyboardShouldPersistTaps={'handled'} contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.formAuth}>
+          <Image source={require('./../components/images/logo-transparent-png.png')} style={styles.logo} />
+          <View>
+            <TextInput placeholder="Nom" placeholderTextColor="#4D2673" value={username} onChangeText={setUsername} style={styles.input} />
+            <TextInput placeholder="Mot de passe" placeholderTextColor="#4D2673" value={password} onChangeText={setPassword} secureTextEntry={true} style={styles.input} />
+            <Pressable onPress={handleLogin} style={styles.button}> 
+            <Text style={styles.beigeButton}>Se Connecter</Text> 
+            </Pressable>
+            {/* <TouchableOpacity onPress={() => navigation.navigate('Register')}> */}
+            <Text style={styles.loginRedirection}>Pas encore inscrit? Cliquez ici!</Text>
+            {/* </TouchableOpacity> */}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
