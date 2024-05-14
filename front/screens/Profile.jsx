@@ -1,20 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   View,
   Image,
   FlatList,
   TouchableOpacity,
   TextInput,
-  Pressable
+  Switch
 } from 'react-native';
 import styles from './../components/styles/style';
+import GameCarrousel from '../components/templates/GameCarrousel';
+import axios from 'axios';
 
 const Profile = () => {
-  var conectedUser = "studio"
+  var conectedUser = "user" // Il faudrait le statut de l'utilisateur ici
+  var date = "date.time" // Il faudrait la date d'inscription ici
   var image = "./../images/teagherStudio.jpg";
   var description = ""
   var x = ""
@@ -27,6 +29,7 @@ const Profile = () => {
   const [nameInput, setNameInput] = useState(styles.hiddenProfileModifyImage)
   const [nameLabel, setNameLabel] = useState(styles.text)
   const [input, setInput] = useState(styles.hiddenfield)
+  const [notif, setNotif] = useState(false); // Il faudrait le booleen notification ici
   
 
   const handleUploadPhoto = () => {
@@ -55,10 +58,32 @@ const Profile = () => {
     setNom(inputName.value)
   }
 
+  const toggleSwitch = () => {
+    setNotif(previousState => !previousState);
+    // Ajout du bouleen dans la bdd
+}
+
+const getGames = async () => {
+    try {
+      const response = await axios.get('http://10.57.33.155:8000/game'); // mettre le filtre favoris ici
+      setGames(response.data);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error('Error:', error.response.data);
+      } else {
+        console.error('Error:', error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getGames();
+  }, []);
+
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-        <ScrollView>
-            <View style={styles.line}>
+        <ScrollView style={styles.addMargin}>
+            <View style={styles.profileName}>
                 <Text style={nameLabel}>{nom}</Text>
                 <TouchableOpacity onPress={displayInput}>
                     <Image style={name} source={require("./../components/images/modify.png")}></Image>
@@ -68,7 +93,13 @@ const Profile = () => {
                     <Image style={nameInput} source={require("./../components/images/send.png")}></Image>
                 </TouchableOpacity>
             </View>
-            <Text style={styles.text}>Membre depuis date.time</Text>
+            <View style={styles.switchNotif}>
+                <Text style={styles.text}>Notifications</Text>
+                <Switch trackColor={{false: '#767577', true: 'lightgreen'}}
+                onValueChange={toggleSwitch}
+                value={notif}></Switch>
+            </View>
+            <Text style={styles.text}>Membre depuis {date}</Text>
             {/* <View style={styles.line}>
                 <Pressable style={styles.addImage} title="Insertion d'image" onPress={handleUploadPhoto} />
                 <Image source={require(image)}></Image>
@@ -80,8 +111,14 @@ const Profile = () => {
             <TextInput value={facebook}></TextInput>
             <TextInput value={instagram}></TextInput>
             <TextInput value={youtube}></TextInput> */}
-            <Text style={styles.title}>Mes jeux</Text>
-            <FlatList horizontal></FlatList>
+            <GameCarrousel title="Mes favoris" games={[
+            { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../components/images/spellswapthumbnail.jpg') },
+            { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../components/images/spellswapthumbnail.jpg') },
+            { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
+          ]}></GameCarrousel>
+          <View>
+            <Text style={styles.title}>Mes tags</Text> 
+          </View>
         </ScrollView>
     </SafeAreaView>
 );

@@ -144,7 +144,11 @@ const styles = StyleSheet.create({
 
   // Profile
 
-
+  profileName:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   profileSendButton: {
       width: 10,
       height: 'auto'
@@ -163,6 +167,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 30,
     height: 30
+  },
+  switchNotif: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   // DetailsJeu
