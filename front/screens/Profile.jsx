@@ -186,7 +186,7 @@ const getGames = async () => {
 
   const addTag = (id) => {
     setSelectedId(id)
-    console.log(selectedId)
+    // console.log(id)
   }
 
   return (
