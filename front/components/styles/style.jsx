@@ -12,8 +12,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
+    color: 'white'
+  },
+  text: {
     color: 'white',
-    marginLeft: 20
+  },
+  hiddenfield: {
+    display: 'none'
   },
   fullPage: {
     paddingTop: 75,
@@ -135,6 +140,38 @@ const styles = StyleSheet.create({
 		margin: 10,
 		color: 'white',
 	},
+
+  // Profile
+
+  profileName:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  profileSendButton: {
+      width: 10,
+      height: 'auto'
+  },
+  profileSendButtonImage: {
+      width: 'auto',
+      height: 10,
+  },
+  profileModifyImage: {
+    resizeMode: 'contain',
+    width: 30,
+    height: 30
+  },
+  hiddenProfileModifyImage: {
+    display: 'none',
+    resizeMode: 'contain',
+    width: 30,
+    height: 30
+  },
+  switchNotif: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
 
   // DetailsJeu
 

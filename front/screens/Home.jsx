@@ -53,7 +53,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <ScrollView
-        style={styles.backgroundStyle} nestedScrollEnabled>
+        style={styles.addMargin} nestedScrollEnabled>
         <View  style={styles.fullPage}>
           <GameCarrousel games={latestGames} title="Les nouveaux jeux →" />
           <StudioCarrousel studios={studios} title="Des studios partenaires →" />

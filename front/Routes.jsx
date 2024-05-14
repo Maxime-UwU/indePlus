@@ -5,6 +5,7 @@ import Login from './screens/Login';
 // import Register from './screens/Register';
 import SplashScreen from './screens/SplashScreen';
 import SplashScreen2 from './screens/SplashScreen2';
+import Profile from './screens/Profile';
 import DetailsJeu from './screens/DetailsJeu';
 import Favorite from './components/templates/Favorite';
 
@@ -65,6 +66,12 @@ const Routes = () => {
             headerRight: () => (
                 <Favorite></Favorite>
             ),
+            }}/>
+            <Stack.Screen name="Profile" component={Profile} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff',
             }}/>
         </Stack.Navigator>
     );
