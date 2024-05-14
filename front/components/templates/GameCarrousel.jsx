@@ -7,8 +7,11 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const GameCarrousel = props => {
+  const navigation = useNavigation();
+
   return (
     <View>
       <Text style={styles.title}>{props.title}</Text> 
@@ -17,7 +20,7 @@ const GameCarrousel = props => {
           horizontal
           data={props.games}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={""} style={styles.gameCard}>
+            <TouchableOpacity onPress={() => {navigation.navigate('DetailsJeu', {game: item} );}} style={styles.gameCard}>
               <Image style={styles.imageCard} source={item.image}/>
               <Text style={styles.titleCard}>{item.title}</Text>
               <Text style={styles.textCard} numberOfLines={2}>{item.studio}</Text>
