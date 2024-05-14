@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 20
   },
+  text: {
+    color: 'white',
+  },
+  hiddenfield: {
+    display: 'none'
+  },
   fullPage: {
     paddingTop: 75,
     paddingBottom: 75
@@ -113,6 +119,29 @@ const styles = StyleSheet.create({
 		margin: 10,
 		color: 'white',
 	},
+
+  // Profile
+
+
+  profileSendButton: {
+      width: 10,
+      height: 'auto'
+  },
+  profileSendButtonImage: {
+      width: 'auto',
+      height: 10,
+  },
+  profileModifyImage: {
+    resizeMode: 'contain',
+    width: 30,
+    height: 30
+  },
+  hiddenProfileModifyImage: {
+    display: 'none',
+    resizeMode: 'contain',
+    width: 30,
+    height: 30
+  }
 });
 
 export default styles;
