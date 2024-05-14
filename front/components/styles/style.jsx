@@ -64,6 +64,28 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly', 
 		alignItems: 'center'
 	},
+  addMargin: {
+    marginLeft: 20,
+    marginRight: 20
+  },
+  socialLink: {
+    resizeMode: 'contain',
+    width: 30,
+    height: 30,
+    margin: 5
+  },
+  socialLinks: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 30,
+    marginTop: 30
+  },
+  socialText: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   gameCard: {
     width: 150,
     borderRadius: 10,
@@ -113,6 +135,49 @@ const styles = StyleSheet.create({
 		margin: 10,
 		color: 'white',
 	},
+
+  // DetailsJeu
+
+  detGameTagList: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  detGameTag: {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    width: 50,
+    marginRight: 5
+  },
+  detGameTagText: {
+    color: 'white',
+    textAlign: 'center'
+  },
+  detGameText: {
+    color: 'white'
+  },
+  detGameDescription: {
+    color: 'white',
+    marginTop: 10,
+    marginBottom: 10
+  },
+  detGameImg: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+  },
+  detGameButton: {
+    backgroundColor: '#FAEBD7',
+		color: '#4D2673',
+    paddingTop: 10,
+    paddingBottom: 10,
+		borderRadius: 30,
+		fontWeight: '700',
+		textAlign: 'center'
+  },
+  favorite: {
+    width: 30,
+    height: 30
+  }
 });
 
 export default styles;
