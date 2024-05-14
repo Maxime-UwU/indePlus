@@ -23,6 +23,7 @@ const Profile = () => {
   var facebook = ""
   var instagram = ""
   var youtube = ""
+  var count = 0
 
   const [nom, setNom] = useState("Test") // il faudrait qu'il y ait le nom de l'utilisateur par defaut ici
   const [name, setName] = useState(styles.profileModifyImage)
@@ -91,10 +92,20 @@ const getGames = async () => {
     }
   };
 
+  const getStudioGames = async () => {
+    // Récupérer les jeux faits par le studio
+    }
+  };
+
 
   useEffect(() => {
-    getGames();
-    getStudios();
+    if (user.role == "STUDIO") {
+        getStudioGames();
+    }
+    else {
+        getGames();
+        getStudios();
+    }
   }, []);
 
   return (
@@ -117,17 +128,47 @@ const getGames = async () => {
                 value={notif}></Switch>
             </View>
             <Text style={styles.text}>Membre depuis {date}</Text>
-            {/* <View style={styles.line}>
+            {user.role == "STUDIO" &&  // on affiche les modifications d'un studio si il s'agit bien d'un studio
+            <><View style={styles.line}>
                 <Pressable style={styles.addImage} title="Insertion d'image" onPress={handleUploadPhoto} />
                 <Image source={require(image)}></Image>
-            </View> */}
-            {/* <Text style={styles.title}>Description</Text>
-            <TextInput style={styles.multiline} value={description} multiline></TextInput> */}
-            {/* <TouchableOpacity style={styles.profileSendButton}><Image style={styles.profileSendButtonImage} source={require("./../components/images/send.png")}></Image></TouchableOpacity> */}
-            {/* <TextInput value={x}></TextInput>
+            </View>
+            <Text style={styles.title}>Description</Text>
+            <TextInput style={styles.multiline} value={description} multiline></TextInput>
+            <TouchableOpacity style={styles.profileSendButton}><Image style={styles.profileSendButtonImage} source={require("./../components/images/send.png")}></Image></TouchableOpacity>
+            <TextInput value={x}></TextInput>
             <TextInput value={facebook}></TextInput>
             <TextInput value={instagram}></TextInput>
-            <TextInput value={youtube}></TextInput> */}
+            <TextInput value={youtube}></TextInput>
+            <View>
+                <Text style={styles.title}>Mes jeux</Text> 
+                <View>
+                    <FlatList
+                    horizontal
+                    data={games}
+                    renderItem={({ item }) => (
+                        {count = 0 && <TouchableOpacity onPress={""} style={styles.gameCard}>
+                        <Image source={require("./../components/images/add.png")}></Image>
+                        <Text>Nouveau jeu</Text>
+                        </TouchableOpacity>}  
+                        <TouchableOpacity onPress={() => {navigation.navigate('DetailsJeu', {game: item} );}} style={styles.gameCard}>
+                        <Image style={styles.imageCard} source={item.image}/>
+                        <Text style={styles.titleCard}>{item.title}</Text>
+                        <Text style={styles.textCard} numberOfLines={2}>{item.studio}</Text>
+                        <View style={styles.line}>
+                            <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                            <Image style={styles.logoCard} source={require('./../images/windows-icon.png')}></Image>
+                        </View>
+                        </TouchableOpacity> //A changer des que la page de modification de jeu sera faite
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                    ListFooterComponent={<View style={{ marginRight: 20 }} />}
+                    />
+                </View>
+            </View>
+            </>
+            }
+            
             <GameCarrousel title="Mes jeux favoris" games={games}></GameCarrousel>
             <StudioCarrousel title="Mes studios favoris" studios={studios}></StudioCarrousel>
           <View>
