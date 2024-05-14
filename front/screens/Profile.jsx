@@ -5,7 +5,6 @@ import {
   Text,
   View,
   Image,
-  FlatList,
   TouchableOpacity,
   TextInput,
   Switch
