@@ -3,10 +3,6 @@ import StudioCarrousel from '../components/templates/StudioCarrousel';
 import GameCarrousel from '../components/templates/GameCarrousel';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import spellSwapThumbnail from './../components/images/spellswapthumbnail.jpg';
-import LimanascentThumbnail from './../components/images/Liminascentthumbnail.png';
-import teagherStudio from './../components/images/teagherStudio.jpg';
-import windowsIcon from './../components/images/windows-icon.png';
 import {
   SafeAreaView,
   ScrollView,
@@ -53,40 +49,15 @@ const Home = () => {
     getStudioData();
   }, []);
 
-  const getImageSource = (imageName) => {
-    switch(imageName) {
-      case './../components/images/spellswapthumbnail.jpg':
-        return spellSwapThumbnail;
-      case './../components/images/Liminascentthumbnail.png':
-        return LimanascentThumbnail;
-      case './../components/images/teagherStudio.jpg':
-        return teagherStudio;
-      default:
-        return spellSwapThumbnail;
-    }
-  };
-
-  const getPlateformSource = (plateformName) => {
-    switch(plateformName) {
-      case 'windows':
-        return windowsIcon;
-      default:
-        return windowsIcon;
-    }
-  };
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <ScrollView
         style={styles.backgroundStyle} nestedScrollEnabled>
         <View  style={styles.fullPage}>
-          <GameCarrousel games={games} title="Les nouveaux jeux →" />
+          <GameCarrousel games={latestGames} title="Les nouveaux jeux →" />
           <StudioCarrousel studios={studios} title="Des studios partenaires →" />
-          <GameCarrousel games={[
-            { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
-          ]} title="Vous aimerez peut-être →" />
+          <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
       </ScrollView>
     </SafeAreaView>

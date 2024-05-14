@@ -20,12 +20,21 @@ class GameController extends AbstractController
 
         if ($latestGames !== null){
             foreach($latestGames as $latestGame){
+                $studios = [];
+                foreach ($latestGame->getStudio() as $studio) {
+                    $studios[] = [
+                        'id' => $studio->getId(),
+                        'name' => $studio->getName(),
+                    ];
+                }
+
                 $latestGamesData[] = [
                     'id' => $latestGame->getId(),
                     'name' => $latestGame->getName(),
                     'image' => $latestGame->getImage(),
                     'description' => $latestGame->getDescription(),
                     'plateform' => $latestGame->getPlateform(),
+                    'studio' => $studios,
                 ];
             }
         }
