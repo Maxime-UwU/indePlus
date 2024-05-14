@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import spellSwapThumbnail from './../components/images/spellswapthumbnail.jpg';
+import LimanascentThumbnail from './../components/images/Liminascentthumbnail.png';
+import teagherStudio from './../components/images/teagherStudio.jpg';
+import windowsIcon from './../components/images/windows-icon.png';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,38 +17,64 @@ import {
 
 const Home = () => {
   const [studios, setStudios] = useState(null);
+  const [latestGames, setLatestGames] = useState(null);
   const [games, setGames] = useState(null);
 
-  const getStudios = async () => {
+
+  const getStudioData = async () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/studio');
-      setStudios(response.data);
+      setStudios(response.data.studiosData);
     } catch (error) {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data);
-      } else {
         console.error('Error:', error.message);
-      }
     }
   };
 
-  const getGames = async () => {
+  const getLatestGameData = async () => {
+    try {
+      const response = await axios.get('http://10.57.33.155:8000/latestGame');
+      setLatestGames(response.data.latestGamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
+  const getGameData = async () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/game');
-      setGames(response.data);
+      setGames(response.data.gamesData);
     } catch (error) {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data);
-      } else {
         console.error('Error:', error.message);
-      }
     }
   };
 
   useEffect(() => {
-    getStudios();
-    getGames();
+    getLatestGameData();
+    getGameData();
+    getStudioData();
   }, []);
+
+  const getImageSource = (imageName) => {
+    switch(imageName) {
+      case './../components/images/spellswapthumbnail.jpg':
+        return spellSwapThumbnail;
+      case './../components/images/Liminascentthumbnail.png':
+        return LimanascentThumbnail;
+      case './../components/images/teagherStudio.jpg':
+        return teagherStudio;
+      default:
+        return spellSwapThumbnail;
+    }
+  };
+
+  const getPlateformSource = (plateformName) => {
+    switch(plateformName) {
+      case 'windows':
+        return windowsIcon;
+      default:
+        return windowsIcon;
+    }
+  };
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
@@ -56,15 +86,14 @@ const Home = () => {
             <View>
               <FlatList
                 horizontal
-                data={games}
+                data={latestGames}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={""} style={styles.gameCard}>
-                    <Image style={styles.imageCard} source={require('./../components/images/teagherStudio.jpg')}/>
+                    <Image style={styles.imageCard} source={getImageSource(item.image)}/>
                     <Text style={styles.titleCard}>{item.name}</Text>
                     <Text style={styles.textCard} numberOfLines={2}>{item.description}</Text>
                     <View style={styles.line}>
-                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
-                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
+                      <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image>
                     </View>
                   </TouchableOpacity>
                 )}
@@ -80,7 +109,7 @@ const Home = () => {
                 data={studios}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={""} style={styles.studioCard}>
-                    <Image style={styles.imageCard} source={require('./../components/images/teagherStudio.jpg')}></Image>
+                    <Image style={styles.imageCard} source={getImageSource(item.image)}></Image>
                     <Text style={styles.titleCard}>{item.name}</Text>
                     <Text numberOfLines={2} style={styles.textCard}>{item.description}</Text>
                   </TouchableOpacity>
@@ -94,19 +123,16 @@ const Home = () => {
             <View style={styles.line}>
               <FlatList
                 horizontal
-                data={[
-                  { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../components/images/spellswapthumbnail.jpg') },
-                  { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../components/images/spellswapthumbnail.jpg') },
-                  { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
-                ]}
+                data={games}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={""} style={styles.gameCard}>
-                    <Image style={styles.imageCard} source={item.image}></Image>
-                    <Text style={styles.titleCard}>{item.title}</Text>
-                    <Text style={styles.textCard}>{item.studio}</Text>
-                    <View style={styles.line}>
-                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
-                      <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
+                    <Image style={styles.imageCard} source={getImageSource(item.image)}></Image>
+                    <Text style={styles.titleCard}>{item.name}</Text>
+                    {item.studio.map(studio => (
+                      <Text key={studio.id} style={styles.textCard}>{studio.name}</Text>
+                    ))}
+                      <View style={styles.line}>
+                      <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image>
                     </View>
                   </TouchableOpacity>
                 )}
