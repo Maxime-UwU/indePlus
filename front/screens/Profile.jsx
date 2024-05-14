@@ -13,6 +13,7 @@ import {
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
 import axios from 'axios';
+import StudioCarrousel from '../components/templates/StudioCarrousel';
 
 const Profile = () => {
   var conectedUser = "user" // Il faudrait le statut de l'utilisateur ici
@@ -30,6 +31,8 @@ const Profile = () => {
   const [nameLabel, setNameLabel] = useState(styles.text)
   const [input, setInput] = useState(styles.hiddenfield)
   const [notif, setNotif] = useState(false); // Il faudrait le booleen notification ici
+  const [games, setGames] = useState(null);
+  const [studios, setStudios] = useState(null);
   
 
   const handleUploadPhoto = () => {
@@ -76,8 +79,23 @@ const getGames = async () => {
     }
   };
 
+  const getStudios = async () => {
+    try {
+      const response = await axios.get('http://10.57.33.155:8000/studio');
+      setStudios(response.data);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error('Error:', error.response.data);
+      } else {
+        console.error('Error:', error.message);
+      }
+    }
+  };
+
+
   useEffect(() => {
     getGames();
+    getStudios();
   }, []);
 
   return (
@@ -111,11 +129,8 @@ const getGames = async () => {
             <TextInput value={facebook}></TextInput>
             <TextInput value={instagram}></TextInput>
             <TextInput value={youtube}></TextInput> */}
-            <GameCarrousel title="Mes favoris" games={[
-            { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
-          ]}></GameCarrousel>
+            <GameCarrousel title="Mes jeux favoris" games={games}></GameCarrousel>
+            <StudioCarrousel title="Mes studios favoris" studios={studios}></StudioCarrousel>
           <View>
             <Text style={styles.title}>Mes tags</Text> 
           </View>
