@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
 	backgroundStyle: {
-    backgroundColor: "#4D2672",
+    backgroundColor: '#4D2672',
 		flex: 1
   },
   line: {
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#FAEBD7',
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: 'white',
+    color: 'black',
     width: 200,
   },
 	bigBeigeButton: {
@@ -171,6 +171,21 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  tag: {
+    backgroundColor: '#D9D9D9',
+    width: '30%',
+    height: 50,
+    marginRight: 10,
+    marginBottom: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  tagName: {
+    color: '#4D2672',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
 
   // DetailsJeu

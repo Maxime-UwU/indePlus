@@ -7,7 +7,8 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  Switch
+  Switch,
+  FlatList
 } from 'react-native';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
@@ -23,6 +24,80 @@ const Profile = () => {
   var facebook = ""
   var instagram = ""
   var youtube = ""
+  var data = [ // Récupérer les tags ici
+    {
+      id: '1',
+      name: 'RPG',
+    },
+    {
+      id: '2',
+      name: 'FPS',
+    },
+    {
+      id: '3',
+      name: 'GESTION',
+    },
+    {
+        id: '4',
+        name: 'RPG',
+      },
+      {
+        id: '5',
+        name: 'FPS',
+      },
+      {
+        id: '6',
+        name: 'GESTION',
+      },
+      {
+        id: '7',
+        name: 'RPG',
+      },
+      {
+        id: '8',
+        name: 'FPS',
+      },
+      {
+        id: '9',
+        name: 'GESTION',
+      },
+      {
+        id: '10',
+        name: 'RPG',
+      },
+      {
+        id: '11',
+        name: 'FPS',
+      },
+      {
+        id: '12',
+        name: 'GESTION',
+      },
+      {
+        id: '13',
+        name: 'RPG',
+      },
+      {
+        id: '14',
+        name: 'FPS',
+      },
+      {
+        id: '15',
+        name: 'GESTION',
+      },
+      {
+        id: '16',
+        name: 'RPG',
+      },
+      {
+        id: '17',
+        name: 'FPS',
+      },
+      {
+        id: '18',
+        name: 'GESTION',
+      },
+  ];
 
   const [nom, setNom] = useState("Test") // il faudrait qu'il y ait le nom de l'utilisateur par defaut ici
   const [name, setName] = useState(styles.profileModifyImage)
@@ -32,6 +107,8 @@ const Profile = () => {
   const [notif, setNotif] = useState(false); // Il faudrait le booleen notification ici
   const [games, setGames] = useState(null);
   const [studios, setStudios] = useState(null);
+  const [selectedId, setSelectedId] = useState();
+
   
 
   const handleUploadPhoto = () => {
@@ -91,11 +168,26 @@ const getGames = async () => {
     }
   };
 
-
   useEffect(() => {
     getGames();
     getStudios();
   }, []);
+
+  const renderItem = ({item}) => {
+    const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+    const color = item.id === selectedId ? 'white' : 'black';
+
+    return (
+        <TouchableOpacity onPress={addTag(item.id)} style={styles.tag}>
+        <Text style={styles.tagName}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const addTag = (id) => {
+    setSelectedId(id)
+    console.log(selectedId)
+  }
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
@@ -132,6 +224,12 @@ const getGames = async () => {
             <StudioCarrousel title="Mes studios favoris" studios={studios}></StudioCarrousel>
           <View>
             <Text style={styles.title}>Mes tags</Text> 
+            <FlatList data={data} renderItem={renderItem}
+        keyExtractor={item => item.id}
+        extraData={selectedId}
+        numColumns={3}>
+                
+            </FlatList>
           </View>
         </ScrollView>
     </SafeAreaView>
