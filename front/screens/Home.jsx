@@ -12,51 +12,52 @@ import {
 
 const Home = () => {
   const [studios, setStudios] = useState(null);
+  const [latestGames, setLatestGames] = useState(null);
   const [games, setGames] = useState(null);
 
-  const getStudios = async () => {
+
+  const getStudioData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/studio');
-      setStudios(response.data);
+      const response = await axios.get('http://192.168.1.11:8000/studio');
+      setStudios(response.data.studiosData);
     } catch (error) {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data);
-      } else {
         console.error('Error:', error.message);
-      }
     }
   };
 
-  const getGames = async () => {
+  const getLatestGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game');
-      setGames(response.data);
+      const response = await axios.get('http://192.168.1.11:8000/latestGame');
+      setLatestGames(response.data.latestGamesData);
     } catch (error) {
-      if (error.response && error.response.data) {
-        console.error('Error:', error.response.data);
-      } else {
         console.error('Error:', error.message);
-      }
+    }
+  };
+
+  const getGameData = async () => {
+    try {
+      const response = await axios.get('http://192.168.1.11:8000/game');
+      setGames(response.data.gamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
     }
   };
 
   useEffect(() => {
-    getStudios();
-    getGames();
+    getLatestGameData();
+    getGameData();
+    getStudioData();
   }, []);
+
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <ScrollView
         style={styles.addMargin} nestedScrollEnabled>
         <View  style={styles.fullPage}>
-          <GameCarrousel games={games} title="Les nouveaux jeux →" />
+          <GameCarrousel games={latestGames} title="Les nouveaux jeux →" />
           <StudioCarrousel studios={studios} title="Des studios partenaires →" />
-          <GameCarrousel games={[
-            { id: 1, title: "Spell Swap", studio: "Teagher Studio", image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 2, title: "Nom du jeu 2", studio: "Studio 2", image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
-          ]} title="Vous aimerez peut-être →" />
+          <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
       </ScrollView>
     </SafeAreaView>

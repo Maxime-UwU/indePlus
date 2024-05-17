@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from './../components/styles/style';
 import { SafeAreaView, ScrollView, Text, View, Image, TextInput, Pressable} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -11,18 +12,24 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://10.57.33.155:8000/login', {
+      const response = await axios.post('http://192.168.1.11:8000/login', {
         username,
         password,
       });
-
-      console.log('Success:', response.data);
+  
+      await AsyncStorage.setItem('jwtToken', response.data.token);
+      console.log('jwtToken', response.data.token);
       navigation.navigate('SplashScreen');
-    } catch (error) {
-      console.error('Error:', 'wrong');
-      Alert.alert('Erreur', 'Identifiant ou mot de passe incorrect');
+    } catch (err) {
+      console.error('Error during login:', err); // Logguez l'erreur de manière plus détaillée
+      setError('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
     }
   };
+
+  const test = async () => {
+    console.log("hi");
+  };
+  
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>

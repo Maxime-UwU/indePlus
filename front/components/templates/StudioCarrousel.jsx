@@ -7,8 +7,21 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import teagherStudio from './../images/teagherStudio.jpg';
+import RunetrailStudio from './../images/RunetrailGamesLogo.png';
 
 const StudioCarrousel = props => {
+
+  const getImageSource = (imageName) => {
+    switch(imageName) {
+      case './../images/teagherStudio.jpg':
+        return teagherStudio;
+        case './../images/RunetrailGamesLogo.png':
+          return RunetrailStudio;
+
+    }
+  };
+
   return (
     <View>
       <Text style={styles.title}>{props.title}</Text> 
@@ -17,7 +30,7 @@ const StudioCarrousel = props => {
       data={props.studios}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={""} style={styles.studioCard}>
-          <Image style={styles.imageCard} source={item.image}></Image>
+          <Image style={styles.imageCard} source={getImageSource(item.image)}></Image>
           <Text style={styles.titleCard}>{item.name}</Text>
           <Text numberOfLines={2} style={styles.textCard}>{item.description}</Text>
         </TouchableOpacity>

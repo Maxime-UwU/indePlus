@@ -72,7 +72,7 @@ const Profile = () => {
 
 const getGames = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game'); // mettre le filtre favoris ici
+      const response = await axios.get('http://192.168.1.11:8000/game'); // mettre le filtre favoris ici
       setGames(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
@@ -85,7 +85,7 @@ const getGames = async () => {
 
   const getStudios = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/studio');
+      const response = await axios.get('http://192.168.1.11:8000/studio');
       setStudios(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
