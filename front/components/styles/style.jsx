@@ -254,7 +254,34 @@ const styles = StyleSheet.create({
   favorite: {
     width: 30,
     height: 30
-  }
+  },
+
+  // Navbar
+
+  navbar: {
+    backgroundColor: '#FAEBD7',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+    position: 'absolute',
+    bottom: 0
+  },
+  navbarIcon: {
+    resizeMode: "contain",
+    width: 30,
+    height: 30
+  },
+  navbarButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: '#4D2672',
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;

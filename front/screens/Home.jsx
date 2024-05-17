@@ -8,6 +8,7 @@ import {
   ScrollView,
   View
 } from 'react-native';
+import Navbar from '../components/navbar/Navbar'; 
 
 
 const Home = () => {
@@ -60,6 +61,7 @@ const Home = () => {
           <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
       </ScrollView>
+      <Navbar />
     </SafeAreaView>
   );
 }
