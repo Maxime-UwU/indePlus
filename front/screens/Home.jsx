@@ -18,7 +18,7 @@ const Home = () => {
 
   const getStudioData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/studio');
+      const response = await axios.get('http://192.168.1.11:8000/studio');
       setStudios(response.data.studiosData);
     } catch (error) {
         console.error('Error:', error.message);
@@ -27,7 +27,7 @@ const Home = () => {
 
   const getLatestGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/latestGame');
+      const response = await axios.get('http://192.168.1.11:8000/latestGame');
       setLatestGames(response.data.latestGamesData);
     } catch (error) {
         console.error('Error:', error.message);
@@ -36,7 +36,7 @@ const Home = () => {
 
   const getGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game');
+      const response = await axios.get('http://192.168.1.11:8000/game');
       setGames(response.data.gamesData);
     } catch (error) {
         console.error('Error:', error.message);

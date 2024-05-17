@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://10.57.33.155:8000/login', {
+      const response = await axios.post('http://192.168.1.11:8000/login', {
         username,
         password,
       });
@@ -24,6 +24,10 @@ const Login = () => {
       console.error('Error during login:', err); // Logguez l'erreur de manière plus détaillée
       setError('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
     }
+  };
+
+  const test = async () => {
+    console.log("hi");
   };
   
 
