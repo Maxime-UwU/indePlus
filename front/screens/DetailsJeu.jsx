@@ -7,6 +7,7 @@ import GameCarrousel from '../components/templates/GameCarrousel';
 const DetailsJeu = ({ route }) => {
   const { game } = route.params;
   const notifServiceRef = useRef(null);
+  const message = "Pour le moment, je suis un texte statique mais ca fait déja le café"
 
   useEffect(() => {
     notifServiceRef.current = new NotifService(
@@ -38,8 +39,7 @@ const DetailsJeu = ({ route }) => {
 
   const sendNotification = () => {
     if (Platform.OS === 'android') {
-      console.log("Button pressed to send notification");
-      notifServiceRef.current.localNotif();
+      notifServiceRef.current.localNotif(message);
     }
   };
 

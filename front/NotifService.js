@@ -38,7 +38,7 @@ export default class NotifService {
     );
   }
 
-  localNotif() {
+  localNotif(message) {
     this.lastId++;
     console.log("Sending local notification with ID:", this.lastId);
     PushNotification.localNotification({
@@ -46,17 +46,17 @@ export default class NotifService {
       autoCancel: true,
       largeIcon: 'ic_launcher', 
       smallIcon: 'ic_notification', 
-      bigText: 'My big text that will be shown when notification is expanded', 
-      subText: 'This is a subText', 
+      bigText: message, 
+      // subText: 'Je suis aussi un texte statique', 
       color: 'red', 
       vibrate: true, 
-      vibration: 300, 
+      vibration: 100, 
       actions: ['Yes', 'No'], 
       invokeApp: true, 
 
       id: this.lastId, 
-      title: 'Local Notification', 
-      message: 'My Notification Message', 
+      title: 'News jeux vidéo indés', 
+      message: message, 
       userInfo: { screen: 'home' }, 
       playSound: true,
       soundName: 'default', 
