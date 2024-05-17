@@ -58,7 +58,7 @@ const GameCarrousel = props => {
               ))}
               <View style={styles.line}>
                 <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image>
-                <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image>
+                {/* <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image> */}
               </View>
             </TouchableOpacity>
           )}
