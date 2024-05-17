@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Studio;
 
 class StudioController extends AbstractController
@@ -27,7 +27,10 @@ class StudioController extends AbstractController
                     'description' => $studio->getDescription(),
                 ];
             }
-            return new JsonResponse($studiosData, 200);
+
+            return new JsonResponse([
+                'studiosData' => $studiosData,
+            ]);
         } else {
             return new JsonResponse(['message' => 'Studios non trouvés'], 404);
         }

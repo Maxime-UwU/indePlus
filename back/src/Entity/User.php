@@ -7,9 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,6 +46,9 @@ class User
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $joinDate = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $role = null;
 
     public function __construct()
     {
@@ -176,5 +180,40 @@ class User
         $this->joinDate = $joinDate;
 
         return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): static
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    // Implémentations des méthodes de UserInterface
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
+    }
+
+    public function getRoles(): array
+    {
+        return [$this->role];
+    }
+
+    public function getSalt(): ?string
+    {
+        // Pas nécessaire si vous utilisez bcrypt ou argon2i
+        return null;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Si vous stockez des données sensibles temporairement, effacez-les ici
     }
 }
