@@ -74,4 +74,36 @@ class GameController extends AbstractController
             'gamesData' => $gamesData,
         ]);
     }
+
+    #[Route('/sameStudioGame', name: 'app_sameStudioGame')]
+    public function sameStudioGame(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $games = $entityManager->getRepository(Game::class)->findAll();
+
+        $gamesData = [];
+
+        if ($games !== null){
+            foreach ($games as $game) {
+                $studios = [];
+                foreach ($game->getStudio() as $studio) {
+                    $studios[] = [
+                        'id' => $studio->getId(),
+                        'name' => $studio->getName(),
+                    ];
+                }
+    
+                $gamesData[] = [
+                    'id' => $game->getId(),
+                    'name' => $game->getName(),
+                    'image' => $game->getImage(),
+                    'plateform' => $game->getPlateform(),
+                    'description' => $game->getDescription(),
+                    'studio' => $studios,
+                ];
+            }
+        }
+        return new JsonResponse([
+            'gamesData' => $gamesData,
+        ]);
+    }
 }
