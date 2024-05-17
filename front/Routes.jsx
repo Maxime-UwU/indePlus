@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 const Routes = () => {
     return (
-        <Stack.Navigator initialRouteName='Profile'>
+        <Stack.Navigator initialRouteName='Login'>
 
             {/* Home */}
 

@@ -51,7 +51,6 @@ export default class NotifService {
       color: 'red', 
       vibrate: true, 
       vibration: 100, 
-      actions: ['Yes', 'No'], 
       invokeApp: true, 
 
       id: this.lastId, 
