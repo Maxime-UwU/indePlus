@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { Image, SafeAreaView, ScrollView, TouchableOpacity, View, Text, Share, Platform } from 'react-native';
 import NotifService from './../NotifService';
 import styles from './../components/styles/style';
@@ -8,11 +9,22 @@ import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png'
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 
 const DetailsJeu = ({ route }) => {
+  const [games, setGames] = useState(null);
   const { game } = route.params;
   const notifServiceRef = useRef(null);
   const message = "Pour le moment, je suis un texte statique mais ca fait déja le café"
 
+  const getGameData = async () => {
+    try {
+      const response = await axios.get('http://10.57.33.155:8000/game');
+      setGames(response.data.gamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
   useEffect(() => {
+    getGameData();
     notifServiceRef.current = new NotifService(
       (token) => console.log('Device Token:', token),
       (notification) => console.log('Notification:', notification)
@@ -23,11 +35,11 @@ const DetailsJeu = ({ route }) => {
 
   const getImageSource = (imageName) => {
     switch(imageName) {
-      case './../components/images/spellswapthumbnail.jpg':
+      case './../images/spellswapthumbnail.jpg':
         return spellSwapThumbnail;
-      case './../components/images/Liminascentthumbnail.png':
+      case './../images/Liminascentthumbnail.png':
         return LimanascentThumbnail;
-      case './../components/images/RunetrailGamesLogo.png':
+      case './../images/RunetrailGamesLogo.png':
         return RunetrailLogo
     }
   };
@@ -60,7 +72,7 @@ const DetailsJeu = ({ route }) => {
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <ScrollView style={styles.addMargin} nestedScrollEnabled>
-        <Image source={require('./../components/images/spellswapthumbnail.jpg')} style={styles.detGameImg} />
+        <Image source={getImageSource(game.image)} style={styles.detGameImg} />
         {Array.isArray(game.studio) ? (
           game.studio.map(studio => (
             <Text key={studio.id} style={styles.detGameText}>{studio.name}</Text>
@@ -89,19 +101,21 @@ const DetailsJeu = ({ route }) => {
             </TouchableOpacity>
         </View>
         <GameCarrousel 
-          games={[
-            { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
-            { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
-            { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
-          ]} 
+          games={games}
+          // games={[
+          //   { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
+          // ]} 
           title="Jeux du même studio →" 
         />
         <GameCarrousel 
-          games={[
-            { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
-            { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
-            { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
-          ]} 
+          games={games}
+          // games={[
+          //   { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
+          // ]} 
           title="Jeux du même genre →" 
         />
       </ScrollView>
