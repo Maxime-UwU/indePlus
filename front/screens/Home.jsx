@@ -60,8 +60,8 @@ const Home = () => {
           <StudioCarrousel studios={studios} title="Des studios partenaires →" />
           <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
-        <Navbar />
       </ScrollView>
+      <Navbar />
     </SafeAreaView>
   );
 }

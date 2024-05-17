@@ -1,43 +1,35 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import styles from './../styles/style';
 
 const Navbar = () => {
+  const navigation = useNavigation();
+
+  const redirect = (route) => {
+    navigation.navigate(route);
+  }
+
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Home</Text>
+      <TouchableOpacity style={styles.navbarButton} onPress={redirect('Profile')}>
+        <Image style={styles.navbarIcon} source={require('./../images/profil.png')}></Image>
+        <Text style={styles.buttonText}>Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.navbarButton} onPress={""}>
+        <Image style={styles.navbarIcon} source={require('./../images/game.png')}></Image>
         <Text style={styles.buttonText}>Games</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.navbarButton} onPress={""}>
+        <Image style={styles.navbarIcon} source={require('./../images/studio.png')}></Image>
         <Text style={styles.buttonText}>Studios</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Profile</Text>
+      <TouchableOpacity style={styles.navbarButton} onPress={redirect('Home')}>
+        <Image style={styles.navbarIcon} source={require('./../images/home.png')}></Image>
+        <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  navbar: {
-    backgroundColor: '#FAEBD7',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  button: {
-    backgroundColor: '#4D2672',
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    borderRadius: 20,
-  },
-  buttonText: {
-    color: '#FAEBD7',
-    fontWeight: 'bold',
-  },
-});
 
 export default Navbar;

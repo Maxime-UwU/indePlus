@@ -3,15 +3,6 @@ import { Image, SafeAreaView, ScrollView, TouchableOpacity, View, Text, Share, P
 import NotifService from './../NotifService';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Text,
-  Share
-} from 'react-native';
 import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
