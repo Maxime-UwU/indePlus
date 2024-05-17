@@ -24,12 +24,12 @@ const GameCarrousel = props => {
         return LimanascentThumbnail;
       case './../images/RunetrailGamesLogo.png':
         return RunetrailLogo
-        case './../components/images/spellswapthumbnail.jpg':
-          return spellSwapThumbnail;
-        case './../components/images/Liminascentthumbnail.png':
-          return LimanascentThumbnail;
-        case './../components/images/RunetrailGamesLogo.png':
-          return RunetrailLogo
+      case './../components/images/spellswapthumbnail.jpg':
+        return spellSwapThumbnail;
+      case './../components/images/Liminascentthumbnail.png':
+        return LimanascentThumbnail;
+      case './../components/images/RunetrailGamesLogo.png':
+        return RunetrailLogo
     }
   };
 
