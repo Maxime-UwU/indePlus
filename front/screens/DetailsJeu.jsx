@@ -3,15 +3,6 @@ import { Image, SafeAreaView, ScrollView, TouchableOpacity, View, Text, Share, P
 import NotifService from './../NotifService';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Text,
-  Share
-} from 'react-native';
 import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
@@ -97,22 +88,22 @@ const DetailsJeu = ({ route }) => {
               <Text style={styles.detGameText}>Partager</Text>
             </TouchableOpacity>
         </View>
-        {/* <GameCarrousel 
+        <GameCarrousel 
           games={[
-            { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: require('./../components/images/spellswapthumbnail.jpg') }
+            { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
+            { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
+            { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
           ]} 
           title="Jeux du même studio →" 
         />
         <GameCarrousel 
           games={[
-            { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: require('./../components/images/spellswapthumbnail.jpg') },
-            { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: require('./../components/images/spellswapthumbnail.jpg') }
+            { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
+            { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
+            { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
           ]} 
           title="Jeux du même genre →" 
-        /> */}
+        />
       </ScrollView>
     </SafeAreaView>
   );
