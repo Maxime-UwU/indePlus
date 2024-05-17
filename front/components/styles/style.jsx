@@ -28,6 +28,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row'
   },
+  labelInput: {
+    color: 'white',
+    fontSize: 16
+  },
+  space: {
+    marginTop: 20
+  },
 	input: {
     marginBottom: 10,
     padding: 5,
@@ -37,6 +44,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     color: "black",
     width: 200,
+  },
+  addImage: {
+    width: 30,
+    resizeMode: 'contain',
+    height: 30,
   },
 	bigBeigeButton: {
 		backgroundColor: '#FAEBD7',
@@ -149,12 +161,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   profileSendButton: {
-      width: 10,
+      width: 30,
       height: 'auto'
   },
   profileSendButtonImage: {
       width: 'auto',
-      height: 10,
+      height: 30,
   },
   profileModifyImage: {
     resizeMode: 'contain',
@@ -171,6 +183,34 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  addDescription: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  multiline: {
+    backgroundColor: 'white',
+    color: '#4D2673',
+    width: '85%',
+    borderRadius: 10
+  },
+  inputStudio: {
+    backgroundColor: 'white',
+    color: '#4D2673',
+    borderRadius: 10,
+  },
+  studioImage: {
+    resizeMode: 'contain',
+    width: 200,
+    height: 200
+  },
+  alignmentStudioImage: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
   },
 
   // DetailsJeu
