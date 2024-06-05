@@ -8,12 +8,13 @@ import SplashScreen2 from './screens/SplashScreen2';
 import Profile from './screens/Profile';
 import DetailsJeu from './screens/DetailsJeu';
 import Favorite from './components/templates/Favorite';
+import ListGames from './screens/ListGames';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
     return (
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator initialRouteName='ListGames'>
 
             {/* Home */}
 
@@ -68,6 +69,12 @@ const Routes = () => {
             ),
             }}/>
             <Stack.Screen name="Profile" component={Profile} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff',
+            }}/>
+            <Stack.Screen name="ListGames" component={ListGames} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
