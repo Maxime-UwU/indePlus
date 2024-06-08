@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     display: 'none'
   },
   fullPage: {
-    paddingTop: 75,
+    paddingTop: 20,
     paddingBottom: 75
   },
   carrousel: {
@@ -281,6 +281,67 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#4D2672',
     fontWeight: 'bold',
+  },
+
+  // ListGames
+
+  gameListCard: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '95%',
+    marginLeft: '2.5%',
+    height: 100,
+    marginTop: 20 
+  },
+  imageListCard: {
+    width: '50%',
+    // resizeMode: 'contain',
+    height: '100%',
+    borderRadius: 10,
+    marginRight: 10
+  },
+  searchBar: {
+    backgroundColor: 'white',
+    width: '70%',
+    borderRadius: 10,
+    height: 40,
+    color: '#4D2672'
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  searchBarArea: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  filterArea: {
+    display: 'flex',
+    width: '80%',
+    marginLeft: '10%'
+  },
+  hiddenFilterArea: {
+    display: 'none',
+  },
+  multiSelectChipContainer: {
+    borderWidth: 0,
+    backgroundColor: '#ddd',
+    borderRadius: 8
+  },
+  multiSelectChipText: {
+    color: '#222',
+    fontSize: 14.5
+  },
+  selectToggle: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    height: 30,
+    verticalAlign: 'middle',
+    paddingLeft: 10,
+    margin: 10,
   },
 });
 
