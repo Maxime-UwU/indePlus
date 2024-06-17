@@ -16,31 +16,33 @@ const Home = () => {
   const [latestGames, setLatestGames] = useState(null);
   const [games, setGames] = useState(null);
 
-
+  // Fonction pour récupérer les données des studios
   const getStudioData = async () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/studio');
       setStudios(response.data.studiosData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // Fonction pour récupérer les données des derniers jeux
   const getLatestGameData = async () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/latestGame');
       setLatestGames(response.data.latestGamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // Fonction pour récupérer les données des jeux
   const getGameData = async () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/game');
       setGames(response.data.gamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
@@ -49,7 +51,6 @@ const Home = () => {
     getGameData();
     getStudioData();
   }, []);
-
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>

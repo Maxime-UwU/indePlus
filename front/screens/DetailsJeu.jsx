@@ -12,17 +12,19 @@ const DetailsJeu = ({ route }) => {
   const [games, setGames] = useState(null);
   const { game } = route.params;
   const notifServiceRef = useRef(null);
-  const message = "Pour le moment, je suis un texte statique mais ca fait déja le café"
+  const message = "Pour le moment, je suis un texte statique mais ça fait déjà le café";
 
+  // Fonction pour récupérer les données des jeux du même studio
   const getGameData = async () => {
     try {
       const response = await axios.get('http://10.57.33.155:8000/sameStudioGame');
       setGames(response.data.gamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // useEffect pour appeler la fonction de récupération de données et initialiser le service de notifications lors du montage du composant
   useEffect(() => {
     getGameData();
     notifServiceRef.current = new NotifService(
@@ -33,6 +35,7 @@ const DetailsJeu = ({ route }) => {
     notifServiceRef.current.createDefaultChannels();
   }, []);
 
+  // Fonction pour obtenir la source de l'image en fonction du nom de l'image
   const getImageSource = (imageName) => {
     switch(imageName) {
       case './../images/spellswapthumbnail.jpg':
@@ -40,10 +43,13 @@ const DetailsJeu = ({ route }) => {
       case './../images/Liminascentthumbnail.png':
         return LimanascentThumbnail;
       case './../images/RunetrailGamesLogo.png':
-        return RunetrailLogo
+        return RunetrailLogo;
+      default:
+        return null;
     }
   };
 
+  // Fonction pour partager le jeu actuel
   const shareGame = useCallback(async () => {
     try {
       const result = await Share.share({
@@ -51,23 +57,25 @@ const DetailsJeu = ({ route }) => {
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          // shared with activity type of result.activityType
+          // Partagé avec un type d'activité spécifique
         } else {
-          // shared
+          // Partagé sans type d'activité spécifique
         }
       } else if (result.action === Share.dismissedAction) {
-        // dismissed
+        // Partage annulé
       }
     } catch (error) {
       console.error(error.message);
     }
   }, [game]);
 
+  // Fonction pour envoyer une notification locale
   const sendNotification = () => {
     if (Platform.OS === 'android') {
       notifServiceRef.current.localNotif(message);
     }
   };
+
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>

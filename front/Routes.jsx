@@ -9,6 +9,7 @@ import Profile from './screens/Profile';
 import DetailsJeu from './screens/DetailsJeu';
 import Favorite from './components/templates/Favorite';
 import ListGames from './screens/ListGames';
+import DetailsStudio from './screens/DetailsStudio';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,17 +69,34 @@ const Routes = () => {
                 <Favorite></Favorite>
             ),
             }}/>
+
+            {/* Profile */}
+
             <Stack.Screen name="Profile" component={Profile} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
             }}/>
+
+            {/* ListGames */}
+
             <Stack.Screen name="ListGames" component={ListGames} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
+            }}/>
+
+            {/* Details Studio*/}
+            <Stack.Screen name="DetailsStudio" component={DetailsStudio} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff',
+            headerRight: () => (
+                <Favorite></Favorite>
+            ),
             }}/>
         </Stack.Navigator>
     );

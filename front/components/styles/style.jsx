@@ -343,6 +343,21 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     margin: 10,
   },
+
+  // Details Studio
+
+  commentText: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: "auto",
+    color: "black",
+  },
+  commentButton: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
+    marginRight: 10
+  }
 });
 
 export default styles;
