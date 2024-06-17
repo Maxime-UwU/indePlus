@@ -78,6 +78,42 @@ class GameController extends AbstractController
     #[Route('/sameStudioGame', name: 'app_sameStudioGame')]
     public function sameStudioGame(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
+        $data = json_decode($request->getContent(), true);
+
+        $name = $data['name'];
+
+        $games = $entityManager->getRepository(Game::class)->findBy(['name' => $name]);
+
+        $gamesData = [];
+
+        if ($games !== null){
+            foreach ($games as $game) {
+                $studios = [];
+                foreach ($game->getStudio() as $studio) {
+                    $studios[] = [
+                        'id' => $studio->getId(),
+                        'name' => $studio->getName(),
+                    ];
+                }
+    
+                $gamesData[] = [
+                    'id' => $game->getId(),
+                    'name' => $game->getName(),
+                    'image' => $game->getImage(),
+                    'plateform' => $game->getPlateform(),
+                    'description' => $game->getDescription(),
+                    'studio' => $studios,
+                ];
+            }
+        }
+        return new JsonResponse([
+            'gamesData' => $gamesData,
+        ]);
+    }
+
+    #[Route('/searchGame', name: 'app_searchGame')]
+    public function searchGames(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
         $games = $entityManager->getRepository(Game::class)->findAll();
 
         $gamesData = [];

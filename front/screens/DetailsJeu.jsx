@@ -4,6 +4,7 @@ import { Image, SafeAreaView, ScrollView, TouchableOpacity, View, Text, Share, P
 import NotifService from './../NotifService';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
@@ -16,7 +17,7 @@ const DetailsJeu = ({ route }) => {
 
   const getGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/sameStudioGame');
+      const response = await axios.get(ip + '/sameStudioGame');
       setGames(response.data.gamesData);
     } catch (error) {
         console.error('Error:', error.message);

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import axios from 'axios';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import { useNavigation } from '@react-navigation/native';
@@ -72,7 +73,7 @@ const Profile = () => {
 
 const getGames = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game'); // mettre le filtre favoris ici
+      const response = await axios.get(ip + '/game'); // mettre le filtre favoris ici
       setGames(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
@@ -85,7 +86,7 @@ const getGames = async () => {
 
   const getStudios = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/studio');
+      const response = await axios.get(ip + '/studio');
       setStudios(response.data);
     } catch (error) {
       if (error.response && error.response.data) {

@@ -18,13 +18,19 @@ const Routes = () => {
 
             {/* Home */}
 
-            <Stack.Screen name="Home" component={Home} options={{
+            <Stack.Screen name="Home" component={ListGames} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff',
+            }}/>
+            {/* <Stack.Screen name="Home" component={Home} options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff'
             }}
-            />
+            /> */}
 
             {/* Auth */}
 
@@ -74,12 +80,12 @@ const Routes = () => {
             },
             headerTintColor: '#fff',
             }}/>
-            <Stack.Screen name="ListGames" component={ListGames} headerBackVisible options={{
+            {/* <Stack.Screen name="ListGames" component={ListGames} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
-            }}/>
+            }}/> */}
         </Stack.Navigator>
     );
 };

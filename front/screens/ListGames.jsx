@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './../components/styles/style'
 import {
   SafeAreaView,
@@ -12,8 +12,13 @@ import {
   TextInput
 } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import ip from '../Ip';
+import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
+import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
+import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 
 const ListGames = () => {
   const navigation = useNavigation();
@@ -22,6 +27,7 @@ const ListGames = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterArea, setFilterArea] = useState(styles.hiddenFilterArea);
   const [name, setName] = useState("")
+  const [games, setGames] = useState(null);
 
   const years = [];
 
@@ -52,6 +58,37 @@ const ListGames = () => {
     { name: 'Trivia', idGenre: 20 }
   ];
 
+  const getGameData = async () => {
+    try {
+      const response = await axios.get(ip + '/game');
+      setGames(response.data.gamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
+  const searchGameData = async () => {
+    try {
+      const response = await axios.get(ip + '/searchGame', {
+        name
+      });
+      setGames(response.data.gamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
+  const getImageSource = (imageName) => {
+    switch(imageName) {
+      case './../images/spellswapthumbnail.jpg':
+        return spellSwapThumbnail;
+      case './../images/Liminascentthumbnail.png':
+        return LimanascentThumbnail;
+      case './../images/RunetrailGamesLogo.png':
+        return RunetrailLogo
+    }
+  };
+
   const data = [
     { id: 1, name: "Spell Swap", studio: [{ id: 1, name: "Teagher Studio" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
     { id: 2, name: "Nom du jeu 2", studio: [{ id: 2, name: "Studio 2" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
@@ -79,6 +116,10 @@ const ListGames = () => {
 
   }
 
+  useEffect(() => {
+    getGameData();
+  }, []);
+
   return (
     <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]}>
       <View style={styles.searchArea}>
@@ -93,7 +134,7 @@ const ListGames = () => {
             value={name}
             onChangeText={name => setName(name)}
           />
-          <TouchableOpacity style={styles.searchButton}>
+          <TouchableOpacity style={styles.searchButton} onPress={searchGameData}>
             <Image style={styles.icon} source={require("./../components/images/search.png")} />
           </TouchableOpacity>
         </View>
@@ -143,17 +184,17 @@ const ListGames = () => {
         />
       </View>
       <FlatList
-        data={data}
+        data={games}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => { navigation.navigate('DetailsJeu', { game: item }); }} style={styles.gameListCard}>
-            <Image style={styles.imageListCard} source={item.image} />
+            <Image style={styles.imageListCard} source={getImageSource(item.image)} />
             <View>
               <Text style={styles.titleCard}>{item.name}</Text>
               {item.studio.map(studio => (
                 <Text key={studio.id} style={styles.textCard} numberOfLines={2}>{studio.name}</Text>
               ))}
               <View style={styles.line}>
-                <Image style={styles.logoCard} source={item.plateform} />
+                {/* <Image style={styles.logoCard} source={item.plateform} /> */}
               </View>
             </View>
           </TouchableOpacity>
