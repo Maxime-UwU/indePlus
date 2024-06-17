@@ -16,15 +16,15 @@ const Navbar = () => {
         <Image style={styles.navbarIcon} source={require('./../images/profil.png')}></Image>
         <Text style={styles.buttonText}>Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navbarButton} onPress={'ListGames'}>
+      <TouchableOpacity onPress={() => {navigation.navigate('ListGames');}} style={styles.gameCard}>
         <Image style={styles.navbarIcon} source={require('./../images/game.png')}></Image>
         <Text style={styles.buttonText}>Games</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navbarButton} onPress={'StudioCarrousel'}>
+      <TouchableOpacity onPress={() => {navigation.navigate('StudioCarrousel');}} style={styles.gameCard}>
         <Image style={styles.navbarIcon} source={require('./../images/studio.png')}></Image>
         <Text style={styles.buttonText}>Studios</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navbarButton} onPress={redirect('Home')}>
+      <TouchableOpacity onPress={() => {navigation.navigate('Home');}} style={styles.gameCard}>
         <Image style={styles.navbarIcon} source={require('./../images/home.png')}></Image>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
