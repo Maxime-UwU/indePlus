@@ -383,6 +383,12 @@ const styles = StyleSheet.create({
   },
   comments: {
     marginBottom: 80
+  },
+  numberComment: {
+    color: "white",
+    fontSize: 19,
+    marginTop: 10,
+    textAlign: "center"
   }
 });
 

@@ -12,6 +12,7 @@ import {
 const CommentSection = () => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [numberComment, setNumberComment] = useState();
   
     const commentArray = [{id: 1, name: "Test username", date: "20 Décembre 2023", content: "Je suis un texte par défaut"}, {id: 2, name: "Test username 2", date: "21 Décembre 2023", content: "J'aime ce studio"}]; // La date peut aussi etre au format 20/12/2023
   
@@ -21,20 +22,22 @@ const CommentSection = () => {
   
     const setCommentsLoad = () => {
 
-      // Récupération des commentaires
+      // Récupération des commentaires + nombre de commentaires
 
       const updatedComments = [];
+      const maxComment = 2;
       commentArray.forEach(comment => {
         updatedComments.push(comment);
       });
       setComments(updatedComments);
+      setNumberComment(maxComment);
     }
   
   const addComment = () => {
     
     // Envoi du nouveau commentaire au back
 
-    setCommentsLoad()
+    setCommentsLoad();
   }
 
   return (
@@ -45,6 +48,16 @@ const CommentSection = () => {
                 <Image style={styles.commentButton} source={require("../images/send.png")}/>
             </TouchableOpacity>
         </View>
+        {numberComment == 1 && 
+            <>
+                <Text style={styles.numberComment}>{numberComment} Commentaire</Text>
+            </>
+        }
+        {numberComment > 1 && 
+            <>
+                <Text style={styles.numberComment}>{numberComment} Commentaires</Text>
+            </>
+        }
         <FlatList 
         data={comments}
         renderItem={({ item }) => (
