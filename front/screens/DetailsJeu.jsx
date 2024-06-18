@@ -71,7 +71,7 @@ const DetailsJeu = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
+    <SafeAreaView style={[styles.backgroundStyle, styles.fullPage]}>
       <ScrollView style={styles.addMargin} nestedScrollEnabled>
         <Image source={getImageSource(game.image)} style={styles.detGameImg} />
         {Array.isArray(game.studio) ? (

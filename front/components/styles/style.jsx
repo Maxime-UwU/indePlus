@@ -381,9 +381,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: "#4D2672"
   },
-  comments: {
-    marginBottom: 80
-  },
   numberComment: {
     color: "white",
     fontSize: 19,
