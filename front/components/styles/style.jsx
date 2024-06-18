@@ -343,6 +343,44 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     margin: 10,
   },
+
+   // Details Studio
+
+   commentText: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: "auto",
+    color: "black",
+    width: "80%"
+  },
+  commentButton: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  commentArea: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  commentCard: {
+    backgroundColor: "#FAEBD7",
+    borderRadius: 5,
+    marginTop: 15,
+    padding: 10
+  },
+  commentName: {
+    color: "black",
+    fontSize: 17
+  },
+  commentContent: {
+    color: "black",
+  },
+  commentDate: {
+    marginBottom: 5,
+    color: "#4D2672"
+  }
 });
 
 export default styles;
