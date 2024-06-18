@@ -38,7 +38,7 @@ const CommentSection = () => {
   }
 
   return (
-    <View>
+    <View style={styles.comments}>
         <View style={styles.commentArea}>
             <TextInput style={styles.commentText} value={newComment} onChangeText={setNewComment} multiline></TextInput>
             <TouchableOpacity onPress={addComment}>

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   fullPage: {
     paddingTop: 20,
-    paddingBottom: 75
+    paddingBottom: 80
   },
   carrousel: {
     display: 'flex',
@@ -380,6 +380,9 @@ const styles = StyleSheet.create({
   commentDate: {
     marginBottom: 5,
     color: "#4D2672"
+  },
+  comments: {
+    marginBottom: 80
   }
 });
 
