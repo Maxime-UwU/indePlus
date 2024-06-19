@@ -212,6 +212,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
+  addCard: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  imageAddCard: {
+    width: 70,
+    height: 70,
+    marginTop: 15,
+    marginBottom: 15,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    alignSelf: 'center',
+  },
+  textAddCard: {
+    color: 'white',
+    textAlign: 'center'
+  },
+  modifyProfile: {
+    width: 40,
+    height: 40
+  },
+  name: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold"
+  },
 
   // DetailsJeu
 
@@ -344,6 +370,17 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 
+  // AddGame
+
+  alignmentGameImage: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+                                 
    // Details Studio
 
    commentText: {
