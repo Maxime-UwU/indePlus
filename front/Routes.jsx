@@ -8,6 +8,7 @@ import SplashScreen2 from './screens/SplashScreen2';
 import Profile from './screens/Profile';
 import DetailsJeu from './screens/DetailsJeu';
 import Favorite from './components/templates/Favorite';
+import DetailsStudio from './screens/DetailsStudio';
 import ListGames from './screens/ListGames';
 import AddGame from './screens/AddGame';
 
@@ -69,23 +70,44 @@ const Routes = () => {
                 <Favorite></Favorite>
             ),
             }}/>
+
+            {/* Profile */}
+
             <Stack.Screen name="Profil" component={Profile} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
             }}/>
+
+            {/* ListGames */}
+
             <Stack.Screen name="Liste Jeux" component={ListGames} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
             }}/>
+
+            {/* AddGame */}
+
             <Stack.Screen name="Ajout Jeu" component={AddGame} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
+            }}/>
+
+            {/* Details Studio*/}
+
+            <Stack.Screen name="DetailsStudio" component={DetailsStudio} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff',
+            headerRight: () => (
+                <Favorite></Favorite>
+            ),
             }}/>
         </Stack.Navigator>
     );
