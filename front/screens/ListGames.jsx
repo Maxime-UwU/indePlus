@@ -29,7 +29,7 @@ const ListGames = () => {
     years.push({ name: year.toString(), id: year });
   }
 
-  const genres = [ // A remplacer par une récupération des tags une fois la bdd lié à cette page
+  const genres = [ // A remplacer par une récupération des tags
     { name: 'Action', idGenre: 1 },
     { name: 'Adventure', idGenre: 2 },
     { name: 'RPG', idGenre: 3 },
@@ -145,7 +145,7 @@ const ListGames = () => {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => { navigation.navigate('DetailsJeu', { game: item }); }} style={styles.gameListCard}>
+          <TouchableOpacity onPress={() => { navigation.navigate('Details Jeu', { game: item }); }} style={styles.gameListCard}>
             <Image style={styles.imageListCard} source={item.image} />
             <View>
               <Text style={styles.titleCard}>{item.name}</Text>

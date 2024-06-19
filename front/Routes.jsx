@@ -9,16 +9,17 @@ import Profile from './screens/Profile';
 import DetailsJeu from './screens/DetailsJeu';
 import Favorite from './components/templates/Favorite';
 import ListGames from './screens/ListGames';
+import AddGame from './screens/AddGame';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
     return (
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator initialRouteName='Connexion'>
 
             {/* Home */}
 
-            <Stack.Screen name="Home" component={Home} options={{
+            <Stack.Screen name="Accueil" component={Home} options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
@@ -28,13 +29,13 @@ const Routes = () => {
 
             {/* Auth */}
 
-            <Stack.Screen name="Login" component={Login} options={{
+            <Stack.Screen name="Connexion" component={Login} options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff'
             }}/>
-            {/* <Stack.Screen name="Register" component={Register} options={{
+            {/* <Stack.Screen name="Inscription" component={Register} options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
@@ -43,14 +44,14 @@ const Routes = () => {
 
             {/* Splash Screens */}
 
-            <Stack.Screen name="SplashScreen" component={SplashScreen} options={{
+            <Stack.Screen name="Bienvenue" component={SplashScreen} options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff'
             }}/>
 
-            <Stack.Screen name="SplashScreen2" component={SplashScreen2} options={{
+            <Stack.Screen name="Vos Tags" component={SplashScreen2} options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
@@ -59,7 +60,7 @@ const Routes = () => {
 
             {/* Details Jeu */}
 
-            <Stack.Screen name="DetailsJeu" component={DetailsJeu} headerBackVisible options={{
+            <Stack.Screen name="Details Jeu" component={DetailsJeu} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
@@ -68,13 +69,19 @@ const Routes = () => {
                 <Favorite></Favorite>
             ),
             }}/>
-            <Stack.Screen name="Profile" component={Profile} headerBackVisible options={{
+            <Stack.Screen name="Profil" component={Profile} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
             }}/>
-            <Stack.Screen name="ListGames" component={ListGames} headerBackVisible options={{
+            <Stack.Screen name="Liste Jeux" component={ListGames} headerBackVisible options={{
+            headerStyle: {
+                backgroundColor: '#4D2672',
+            },
+            headerTintColor: '#fff',
+            }}/>
+            <Stack.Screen name="Ajout Jeu" component={AddGame} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },
