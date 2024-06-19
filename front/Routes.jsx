@@ -100,7 +100,7 @@ const Routes = () => {
 
             {/* Details Studio*/}
 
-            <Stack.Screen name="DetailsStudio" component={DetailsStudio} headerBackVisible options={{
+            <Stack.Screen name="Details Studio" component={DetailsStudio} headerBackVisible options={{
             headerStyle: {
                 backgroundColor: '#4D2672',
             },

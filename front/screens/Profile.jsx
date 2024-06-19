@@ -209,7 +209,7 @@ const getGames = async () => {
                                     </TouchableOpacity>
                                 </View>
                             ): (
-                                <TouchableOpacity onPress={() => { navigation.navigate('AJout Jeu', { game: item }); }} style={styles.gameCard}>
+                                <TouchableOpacity onPress={() => { navigation.navigate('Ajout Jeu', { game: item }); }} style={styles.gameCard}>
                                     <Image style={styles.imageCard} source={item.image} />
                                     <Text style={styles.titleCard}>{item.title}</Text>
                                     <Text style={styles.textCard} numberOfLines={2}>{item.studio}</Text>
