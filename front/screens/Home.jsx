@@ -17,34 +17,35 @@ const Home = () => {
   const [latestGames, setLatestGames] = useState(null);
   const [games, setGames] = useState(null);
 
-
+  // Fonction pour récupérer les données des studios
   const getStudioData = async () => {
     try {
-      const response = await axios.get(ip + '/studio');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/studio');
       setStudios(response.data.studiosData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // Fonction pour récupérer les données des derniers jeux
   const getLatestGameData = async () => {
     try {
-      const response = await axios.get(ip + '/latestGame');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/latestGame');
       setLatestGames(response.data.latestGamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // Fonction pour récupérer les données des jeux
   const getGameData = async () => {
     try {
-      const response = await axios.get(ip + '/game');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/game');
       setGames(response.data.gamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
-
   useEffect(() => {
     getLatestGameData();
     getGameData();

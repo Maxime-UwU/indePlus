@@ -13,14 +13,14 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(ip + '/login', {
+      const response = await axios.post('https://132d-92-174-83-81.ngrok-free.app/login', {
         username,
         password,
       });
   
       await AsyncStorage.setItem('jwtToken', response.data.token);
       console.log('jwtToken', response.data.token);
-      navigation.navigate('SplashScreen');
+      navigation.navigate('Bienvenue');
     } catch (err) {
       console.error('Error during login:', err); // Logguez l'erreur de manière plus détaillée
       setError('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
@@ -43,7 +43,7 @@ const Login = () => {
             <Pressable onPress={handleLogin} style={styles.button}> 
             <Text style={styles.beigeButton}>Se Connecter</Text> 
             </Pressable>
-            {/* <TouchableOpacity onPress={() => navigation.navigate('Register')}> */}
+            {/* <TouchableOpacity onPress={() => navigation.navigate('Inscription')}> */}
             <Text style={styles.loginRedirection}>Pas encore inscrit? Cliquez ici!</Text>
             {/* </TouchableOpacity> */}
           </View>

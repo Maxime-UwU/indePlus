@@ -22,6 +22,7 @@ import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 
 const ListGames = () => {
   const navigation = useNavigation();
+
   const [selectedYears, setSelectedYears] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -29,13 +30,14 @@ const ListGames = () => {
   const [name, setName] = useState("")
   const [games, setGames] = useState(null);
 
+  // Tableau pour stocker les années allant de 2024 à 1980
   const years = [];
-
   for (let year = 2024; year >= 1980; year--) {
     years.push({ name: year.toString(), id: year });
   }
 
-  const genres = [ // A remplacer par une récupération des tags une fois la bdd lié à cette page
+  // Liste des genres de jeux (à remplacer par une récupération dynamique)
+  const genres = [
     { name: 'Action', idGenre: 1 },
     { name: 'Adventure', idGenre: 2 },
     { name: 'RPG', idGenre: 3 },
@@ -92,28 +94,25 @@ const ListGames = () => {
   const data = [
     { id: 1, name: "Spell Swap", studio: [{ id: 1, name: "Teagher Studio" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
     { id: 2, name: "Nom du jeu 2", studio: [{ id: 2, name: "Studio 2" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 3, name: "Nom du jeu 3", studio: [{ id: 3, name: "Studio 3" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 4, name: "Spell Swap", studio: [{ id: 1, name: "Teagher Studio" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 5, name: "Nom du jeu 2", studio: [{ id: 2, name: "Studio 2" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
     { id: 6, name: "Nom du jeu 3", studio: [{ id: 3, name: "Studio 3" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') }
   ];
 
+  // Fonction pour afficher ou cacher les filtres
   const displayFilter = () => {
     if(filterOpen == true) {
       setFilterOpen(false);
       setFilterArea(styles.hiddenFilterArea)
-    }
-    else {
+    } else {
       setFilterOpen(true);
       setFilterArea(styles.filterArea)
     }
   }
 
+  // Fonction de recherche avec les filtres sélectionnés
   const search = () => {
-    console.log(selectedYears , selectedGenres, name); // Les 3 valeurs à ajouter dans la requete
+    console.log(selectedYears, selectedGenres, name); // Les 3 valeurs à ajouter dans la requête
 
     // Envoi au back et récupération des jeux
-
   }
 
   useEffect(() => {

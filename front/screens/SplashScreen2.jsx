@@ -19,7 +19,7 @@ const SplashScreen2 = () => {
       <View style={styles.formAuth}>
         <Text style={styles.title}>Quel genre de jeu vous intéresse?</Text>
         <TextInput></TextInput>
-        <Pressable onPress={() => navigation.navigate('Home')}><Text style={styles.beigeButton}>Commencer</Text></Pressable>
+        <Pressable onPress={() => navigation.navigate('Accueil')}><Text style={styles.beigeButton}>Commencer</Text></Pressable>
       </View>
     </SafeAreaView>
     
