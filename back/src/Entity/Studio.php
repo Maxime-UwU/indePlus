@@ -25,9 +25,6 @@ class Studio
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $comment = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $urlX = null;
 
@@ -58,10 +55,17 @@ class Studio
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favStudio')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(mappedBy: 'studio', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,18 +105,6 @@ class Studio
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getComment(): ?array
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?array $comment): static
-    {
-        $this->comment = $comment;
 
         return $this;
     }
@@ -238,6 +230,35 @@ class Studio
     {
         if ($this->users->removeElement($user)) {
             $user->removeFavStudio($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setStudio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->getStudio() === $this) {
+                $comment->setStudio(null);
+            }
         }
 
         return $this;

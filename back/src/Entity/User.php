@@ -50,11 +50,18 @@ class User implements UserInterface
     #[ORM\Column(length: 255)]
     private ?string $role = null;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'Content')]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
         $this->favGames = new ArrayCollection();
         $this->favStudio = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -215,5 +222,35 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         // Si vous stockez des données sensibles temporairement, effacez-les ici
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setContent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getContent() === $this) {
+                $comment->setContent(null);
+            }
+        }
+
+        return $this;
     }
 }

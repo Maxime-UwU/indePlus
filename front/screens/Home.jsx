@@ -1,6 +1,7 @@
 import styles from './../components/styles/style';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {
@@ -62,7 +63,7 @@ const Home = () => {
           <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
       </ScrollView>
-      <Navbar />
+      {/* <Navbar /> */}
     </SafeAreaView>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import axios from 'axios';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import { useNavigation } from '@react-navigation/native';

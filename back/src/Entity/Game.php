@@ -31,9 +31,6 @@ class Game
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $comment = null;
-
     /**
      * @var Collection<int, Tag>
      */
@@ -55,11 +52,18 @@ class Game
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favGames')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(mappedBy: 'game', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->studio = new ArrayCollection();
         $this->tag = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,18 +127,6 @@ class Game
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): static
-    {
-        $this->comment = $comment;
 
         return $this;
     }
@@ -221,6 +213,35 @@ class Game
     {
         if ($this->users->removeElement($user)) {
             $user->removeFavGame($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->getGame() === $this) {
+                $comment->setGame(null);
+            }
         }
 
         return $this;

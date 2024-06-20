@@ -87,6 +87,7 @@ const Routes = () => {
                 backgroundColor: '#4D2672',
             },
             headerTintColor: '#fff',
+
             }}/>
 
             {/* AddGame */}
