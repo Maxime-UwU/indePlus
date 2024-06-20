@@ -9,7 +9,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import ip from '../Ip';
@@ -69,7 +69,7 @@ const ListGames = () => {
 
   const searchGameData = async () => {
     try {
-      const response = await axios.get(ip + '/searchGame', {
+      const response = await axios.post(ip + '/searchGame', {
         name
       });
       setGames(response.data.gamesData);
@@ -121,7 +121,7 @@ const ListGames = () => {
   }, []);
 
   return (
-    <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]}>
+    <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]} keyboardShouldPersistTaps='handled'>
       <View style={styles.searchArea}>
         <View style={styles.searchBarArea}>
           <TouchableOpacity style={styles.filterOpenButton} onPress={displayFilter}>
