@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import Login from 'C:\Users\User\GitHub\indePlus\indePlus\front\screens\Login.jsx'; // Assurez-vous que le chemin est correct
+import Login from './../screens/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -13,6 +13,10 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 const mock = new MockAdapter(axios);
 
 describe('Login Screen', () => {
+  beforeEach(() => {
+    mock.reset();
+  });
+
   it('renders correctly', () => {
     const { getByPlaceholderText, getByText } = render(
       <NavigationContainer>

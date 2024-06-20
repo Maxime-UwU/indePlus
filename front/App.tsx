@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, Platform, PermissionsAndroid, PermissionStatus } from 'react-native';
-import Routes from './Routes'; 
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useEffect} from 'react';
+import {
+  SafeAreaView,
+  Platform,
+  PermissionsAndroid,
+  PermissionStatus,
+} from 'react-native';
+import Routes from './Routes';
+import {NavigationContainer} from '@react-navigation/native';
 
 const App: React.FC = () => {
-
   useEffect(() => {
     const requestNotificationPermission = async () => {
       try {
         if (Platform.OS === 'android') {
           await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
+            PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
           );
         }
       } catch (err) {
