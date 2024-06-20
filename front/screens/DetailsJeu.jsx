@@ -4,9 +4,11 @@ import { Image, SafeAreaView, ScrollView, TouchableOpacity, View, Text, Share, P
 import NotifService from './../NotifService';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
+import CommentSection from '../components/templates/CommentSection';
 
 const DetailsJeu = ({ route }) => {
   const [games, setGames] = useState(null);
@@ -16,7 +18,7 @@ const DetailsJeu = ({ route }) => {
 
   const getGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/sameStudioGame');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/sameStudioGame');
       setGames(response.data.gamesData);
     } catch (error) {
         console.error('Error:', error.message);
@@ -70,7 +72,7 @@ const DetailsJeu = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
+    <SafeAreaView style={[styles.backgroundStyle, styles.fullPage]}>
       <ScrollView style={styles.addMargin} nestedScrollEnabled>
         <Image source={getImageSource(game.image)} style={styles.detGameImg} />
         {Array.isArray(game.studio) ? (
@@ -118,6 +120,7 @@ const DetailsJeu = ({ route }) => {
           // ]} 
           title="Jeux du même genre →" 
         />
+        <CommentSection/>
       </ScrollView>
     </SafeAreaView>
   );

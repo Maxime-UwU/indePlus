@@ -106,4 +106,46 @@ class GameController extends AbstractController
             'gamesData' => $gamesData,
         ]);
     }
+
+    #[Route('/searchGame', name: 'app_searchGame')]
+public function searchGames(Request $request, EntityManagerInterface $entityManager): JsonResponse
+{
+    $data = json_decode($request->getContent(), true);
+
+    $name = $data['name'] ?? '';
+
+    $queryBuilder = $entityManager->getRepository(Game::class)->createQueryBuilder('g');
+    $queryBuilder->where('g.name LIKE :name')
+                 ->setParameter('name', '%' . $name . '%');
+
+    $games = $queryBuilder->getQuery()->getResult();
+
+    $gamesData = [];
+
+    if ($games !== null) {
+        foreach ($games as $game) {
+            $studios = [];
+            foreach ($game->getStudio() as $studio) {
+                $studios[] = [
+                    'id' => $studio->getId(),
+                    'name' => $studio->getName(),
+                ];
+            }
+
+            $gamesData[] = [
+                'id' => $game->getId(),
+                'name' => $game->getName(),
+                'image' => $game->getImage(),
+                'plateform' => $game->getPlateform(),
+                'description' => $game->getDescription(),
+                'studio' => $studios,
+            ];
+        }
+    }
+
+    return new JsonResponse([
+        'gamesData' => $gamesData,
+    ]);
+}
+
 }

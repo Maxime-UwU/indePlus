@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   fullPage: {
     paddingTop: 20,
-    paddingBottom: 75
+    paddingBottom: 80
   },
   carrousel: {
     display: 'flex',
@@ -212,6 +212,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
+  addCard: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  imageAddCard: {
+    width: 70,
+    height: 70,
+    marginTop: 15,
+    marginBottom: 15,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    alignSelf: 'center',
+  },
+  textAddCard: {
+    color: 'white',
+    textAlign: 'center'
+  },
+  modifyProfile: {
+    width: 40,
+    height: 40
+  },
+  name: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold"
+  },
 
   // DetailsJeu
 
@@ -343,6 +369,61 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     margin: 10,
   },
+
+  // AddGame
+
+  alignmentGameImage: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+                                 
+   // Details Studio
+
+   commentText: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: "auto",
+    color: "black",
+    width: "80%"
+  },
+  commentButton: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  commentArea: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  commentCard: {
+    backgroundColor: "#FAEBD7",
+    borderRadius: 5,
+    marginTop: 15,
+    padding: 10
+  },
+  commentName: {
+    color: "black",
+    fontSize: 17
+  },
+  commentContent: {
+    color: "black",
+  },
+  commentDate: {
+    marginBottom: 5,
+    color: "#4D2672"
+  },
+  numberComment: {
+    color: "white",
+    fontSize: 19,
+    marginTop: 10,
+    textAlign: "center"
+  }
 });
 
 export default styles;

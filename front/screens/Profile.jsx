@@ -12,9 +12,11 @@ import {
 } from 'react-native';
 import styles from './../components/styles/style';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import axios from 'axios';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import { useNavigation } from '@react-navigation/native';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -39,9 +41,44 @@ const Profile = () => {
   const [studios, setStudios] = useState(null);
   
 
-  const handleUploadPhoto = () => {
+    const handleUploadPhoto = async () => {
+        const options = {
+            mediaType: 'photo',
+            quality: 1,
+        };
 
-  }
+        launchImageLibrary(options, async (response) => {
+            if (response.didCancel) {
+                console.log('Pas d\'image choisie');
+            } else if (response.error) {
+                console.log('Erreur lors de la récupération de l\'image: ', response.error);
+            } else {
+                const source = { uri: response.assets[0].uri };
+                setImageUri(source.uri);
+                try {
+                    const formData = new FormData();
+                    formData.append('image', {
+                        uri: source.uri,
+                        type: response.assets[0].type,
+                        name: response.assets[0].fileName,
+                    });
+
+                    const response = await axios.post('https://example.com/api/upload-image', formData, { // envoi de l'image à l'API pour la sauvegarder en local
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    });
+
+                    console.log('Image envoyée avec succès:', response.data);
+                    Alert.alert('Succès', 'Image téléchargée avec succès sur le serveur.');
+
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi de l\'image:', error);
+                    Alert.alert('Erreur', 'Impossible d\'envoyer l\'image. Veuillez réessayer.');
+                }
+            }
+        });
+    }
 
   const displayInput = () => {
     setInput(styles.input)
@@ -72,7 +109,7 @@ const Profile = () => {
 
 const getGames = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game'); // mettre le filtre favoris ici
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/game'); // mettre le filtre favoris ici
       setGames(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
@@ -85,7 +122,7 @@ const getGames = async () => {
 
   const getStudios = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/studio');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/studio');
       setStudios(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
@@ -118,16 +155,7 @@ const getGames = async () => {
   return (
     <SafeAreaView style={styles.backgroundStyle}>
         <ScrollView style={styles.addMargin}>
-            <View style={styles.profileName}>
-                <Text style={nameLabel}>{nom}</Text>
-                <TouchableOpacity onPress={displayInput}>
-                    <Image style={name} source={require("./../components/images/modify.png")}></Image>
-                </TouchableOpacity>
-                <TextInput defaultValue={nom} style={input} onChangeText={newName => setNom(newName)}></TextInput>
-                <TouchableOpacity onPress={hideInput}>
-                    <Image style={nameInput} source={require("./../components/images/send.png")}></Image>
-                </TouchableOpacity>
-            </View>
+            <Text style={styles.name}>{nom}</Text>
             <View style={styles.switchNotif}>
                 <Text style={styles.text}>Notifications</Text>
                 <Switch trackColor={{false: '#767577', true: 'lightgreen'}}
@@ -164,26 +192,38 @@ const getGames = async () => {
                             { id: 3, title: "Nom du jeu 3", studio: "Studio 3", image: require('./../components/images/spellswapthumbnail.jpg') }
                         ]}
                         renderItem={({ item }) => (
-                        <View>
-                            {/* {count = 0 && 
-                                <TouchableOpacity onPress={test} style={styles.gameCard}>
-                                    <Image source={require("./../components/images/add.svg")} style={styles.imageCard} />
-                                    <Text style={styles.textCard}>Nouveau jeu</Text>
-                                </TouchableOpacity>
-                            }   */}
-                            <TouchableOpacity onPress={() => {navigation.navigate('DetailsJeu', {game: item} );}} style={styles.gameCard}>
-                                <Image style={styles.imageCard} source={item.image}/>
-                                <Text style={styles.titleCard}>{item.title}</Text>
-                                <Text style={styles.textCard} numberOfLines={2}>{item.studio}</Text>
-                                <View style={styles.line}>
-                                    <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
-                                    <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')}></Image>
+                            <View>
+                            {item.id === 1 ? (
+                                <View style={styles.addCard}>
+                                    <TouchableOpacity onPress={() => {navigation.navigate('Ajout Jeu'); }} style={styles.gameCard}>
+                                        <Image source={require("./../components/images/add.png")} style={styles.imageAddCard} />
+                                        <Text style={styles.textAddCard}>Nouveau jeu</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => { navigation.navigate('Ajout Jeu', { game: item }); }} style={styles.gameCard}>
+                                        <Image style={styles.imageCard} source={item.image} />
+                                        <Text style={styles.titleCard}>{item.title}</Text>
+                                        <Text style={styles.textCard} numberOfLines={2}>{item.studio}</Text>
+                                        <View style={styles.line}>
+                                        <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')} />
+                                        <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')} />
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
-                            </TouchableOpacity> 
-                        </View>//A changer des que la page de modification de jeu sera faite
-                    )}
-                    keyExtractor={item => item.id.toString()}
-                    ListFooterComponent={<View style={{ marginRight: 20 }} />}
+                            ): (
+                                <TouchableOpacity onPress={() => { navigation.navigate('Ajout Jeu', { game: item }); }} style={styles.gameCard}>
+                                    <Image style={styles.imageCard} source={item.image} />
+                                    <Text style={styles.titleCard}>{item.title}</Text>
+                                    <Text style={styles.textCard} numberOfLines={2}>{item.studio}</Text>
+                                    <View style={styles.line}>
+                                    <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')} />
+                                    <Image style={styles.logoCard} source={require('./../components/images/windows-icon.png')} />
+                                    </View>
+                                </TouchableOpacity>
+                            )}
+                            </View>
+                        )}
+                        keyExtractor={item => item.id.toString()}
+                        ListFooterComponent={<View style={{ marginRight: 20 }} />}
                     />
                 </View>
             </View>

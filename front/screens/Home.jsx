@@ -1,6 +1,7 @@
 import styles from './../components/styles/style';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import ip from '../Ip';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {
@@ -16,34 +17,35 @@ const Home = () => {
   const [latestGames, setLatestGames] = useState(null);
   const [games, setGames] = useState(null);
 
-
+  // Fonction pour récupérer les données des studios
   const getStudioData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/studio');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/studio');
       setStudios(response.data.studiosData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // Fonction pour récupérer les données des derniers jeux
   const getLatestGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/latestGame');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/latestGame');
       setLatestGames(response.data.latestGamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
+  // Fonction pour récupérer les données des jeux
   const getGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game');
+      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/game');
       setGames(response.data.gamesData);
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
     }
   };
-
   useEffect(() => {
     getLatestGameData();
     getGameData();
@@ -61,7 +63,7 @@ const Home = () => {
           <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
       </ScrollView>
-      <Navbar />
+      {/* <Navbar /> */}
     </SafeAreaView>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './../components/styles/style'
 import {
   SafeAreaView,
@@ -9,27 +9,35 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import ip from '../Ip';
+import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
+import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
+import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 
 const ListGames = () => {
   const navigation = useNavigation();
+
   const [selectedYears, setSelectedYears] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterArea, setFilterArea] = useState(styles.hiddenFilterArea);
   const [name, setName] = useState("")
+  const [games, setGames] = useState(null);
 
+  // Tableau pour stocker les années allant de 2024 à 1980
   const years = [];
-
   for (let year = 2024; year >= 1980; year--) {
     years.push({ name: year.toString(), id: year });
   }
 
-  const genres = [ // A remplacer par une récupération des tags une fois la bdd lié à cette page
+  // Liste des genres de jeux (à remplacer par une récupération dynamique)
+  const genres = [
     { name: 'Action', idGenre: 1 },
     { name: 'Adventure', idGenre: 2 },
     { name: 'RPG', idGenre: 3 },
@@ -52,35 +60,67 @@ const ListGames = () => {
     { name: 'Trivia', idGenre: 20 }
   ];
 
+  const getGameData = async () => {
+    try {
+      const response = await axios.get(ip + '/game');
+      setGames(response.data.gamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
+  const searchGameData = async () => {
+    try {
+      const response = await axios.post(ip + '/searchGame', {
+        name
+      });
+      setGames(response.data.gamesData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
+  const getImageSource = (imageName) => {
+    switch(imageName) {
+      case './../images/spellswapthumbnail.jpg':
+        return spellSwapThumbnail;
+      case './../images/Liminascentthumbnail.png':
+        return LimanascentThumbnail;
+      case './../images/RunetrailGamesLogo.png':
+        return RunetrailLogo
+    }
+  };
+
   const data = [
     { id: 1, name: "Spell Swap", studio: [{ id: 1, name: "Teagher Studio" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
     { id: 2, name: "Nom du jeu 2", studio: [{ id: 2, name: "Studio 2" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 3, name: "Nom du jeu 3", studio: [{ id: 3, name: "Studio 3" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 4, name: "Spell Swap", studio: [{ id: 1, name: "Teagher Studio" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 5, name: "Nom du jeu 2", studio: [{ id: 2, name: "Studio 2" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
     { id: 6, name: "Nom du jeu 3", studio: [{ id: 3, name: "Studio 3" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') }
   ];
 
+  // Fonction pour afficher ou cacher les filtres
   const displayFilter = () => {
     if(filterOpen == true) {
       setFilterOpen(false);
       setFilterArea(styles.hiddenFilterArea)
-    }
-    else {
+    } else {
       setFilterOpen(true);
       setFilterArea(styles.filterArea)
     }
   }
 
+  // Fonction de recherche avec les filtres sélectionnés
   const search = () => {
-    console.log(selectedYears , selectedGenres, name); // Les 3 valeurs à ajouter dans la requete
+    console.log(selectedYears, selectedGenres, name); // Les 3 valeurs à ajouter dans la requête
 
     // Envoi au back et récupération des jeux
-
   }
 
+  useEffect(() => {
+    getGameData();
+  }, []);
+
   return (
-    <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]}>
+    <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]} keyboardShouldPersistTaps='handled'>
       <View style={styles.searchArea}>
         <View style={styles.searchBarArea}>
           <TouchableOpacity style={styles.filterOpenButton} onPress={displayFilter}>
@@ -93,7 +133,7 @@ const ListGames = () => {
             value={name}
             onChangeText={name => setName(name)}
           />
-          <TouchableOpacity style={styles.searchButton}>
+          <TouchableOpacity style={styles.searchButton} onPress={searchGameData}>
             <Image style={styles.icon} source={require("./../components/images/search.png")} />
           </TouchableOpacity>
         </View>
@@ -143,17 +183,17 @@ const ListGames = () => {
         />
       </View>
       <FlatList
-        data={data}
+        data={games}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => { navigation.navigate('DetailsJeu', { game: item }); }} style={styles.gameListCard}>
-            <Image style={styles.imageListCard} source={item.image} />
+            <Image style={styles.imageListCard} source={getImageSource(item.image)} />
             <View>
               <Text style={styles.titleCard}>{item.name}</Text>
               {item.studio.map(studio => (
                 <Text key={studio.id} style={styles.textCard} numberOfLines={2}>{studio.name}</Text>
               ))}
               <View style={styles.line}>
-                <Image style={styles.logoCard} source={item.plateform} />
+                {/* <Image style={styles.logoCard} source={item.plateform} /> */}
               </View>
             </View>
           </TouchableOpacity>

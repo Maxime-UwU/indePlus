@@ -50,7 +50,7 @@ const GameCarrousel = props => {
           horizontal
           data={props.games}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => {navigation.navigate('DetailsJeu', {game: item} );}} style={styles.gameCard}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Details Jeu', {game: item} );}} style={styles.gameCard}>
               <Image style={styles.imageCard} source={getImageSource(item.image)}/>
               <Text style={styles.titleCard}>{item.name}</Text>
               {item.studio.map(studio => (

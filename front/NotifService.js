@@ -19,10 +19,6 @@ export default class NotifService {
         PushNotification.setApplicationIconBadgeNumber(0);
       }
     });
-
-    PushNotification.getChannels((channels) => {
-      console.log(channels);
-    });
   }
 
   createDefaultChannels() {
@@ -33,14 +29,12 @@ export default class NotifService {
         channelDescription: "A default channel", 
         importance: Importance.HIGH, 
         vibrate: true, 
-      },
-      (created) => console.log(`createChannel 1 returned '${created}'`)
+      }
     );
   }
 
   localNotif(message) {
     this.lastId++;
-    console.log("Sending local notification with ID:", this.lastId);
     PushNotification.localNotification({
       channelId: '1',
       autoCancel: true,
@@ -49,8 +43,9 @@ export default class NotifService {
       bigText: message, 
       // subText: 'Je suis aussi un texte statique', 
       color: 'red', 
-      vibrate: true, 
-      vibration: 100, 
+            // vibrate: true, 
+      // vibration: 100, 
+      vibrate: false,
       invokeApp: true, 
 
       id: this.lastId, 
