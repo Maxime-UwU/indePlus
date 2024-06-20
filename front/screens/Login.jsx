@@ -22,7 +22,7 @@ const Login = () => {
       navigation.navigate('SplashScreen');
     } catch (err) {
       console.error('Error during login:', err); // Logguez l'erreur de manière plus détaillée
-      setError('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
+      console.log('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
     }
   };
 
