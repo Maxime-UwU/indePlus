@@ -121,26 +121,50 @@ const DetailsJeu = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <FlatList
-        data={games}
-        renderItem={renderGameItem}
-        keyExtractor={(item) => item.id.toString()}
-        ListHeaderComponent={renderHeader}
-        ListFooterComponent={
-          <>
-            <GameCarrousel 
-              games={games}
-              title="Jeux du même studio →" 
-            />
-            <GameCarrousel 
-              games={games}
-              title="Jeux du même genre →" 
-            />
-            <CommentSection />
-            <Navbar />
-          </>
-        }
-      />
+      <ScrollView style={[styles.addMargin, styles.fullPage]} nestedScrollEnabled>
+        <Image source={getImageSource(game.image)} style={styles.detGameImg} />
+        <Text style={styles.detGameText}>Studio : {game.studio.name}</Text>
+        <View style={styles.detGameTagList}>
+          <View style={styles.detGameTag}>
+            <Text style={styles.detGameTagText}>Tag 1</Text>
+          </View>
+          <View style={styles.detGameTag}>
+            <Text style={styles.detGameTagText}>Tag 2</Text>
+          </View>
+        </View>
+        <Text style={styles.detGameText}>Sortie : {game.release_date}</Text>
+        <Text style={styles.detGameDescription}>{game.description}</Text>
+        <View style={styles.socialLinks}>
+          <TouchableOpacity onPress={sendNotification} style={styles.socialText}>
+          <Image style={styles.socialLink} source={require("./../components/images/download.png")} />
+              <Text style={styles.detGameText}>Télécharger</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={shareGame} style={styles.socialText}>
+              <Image style={styles.socialLink} source={require("./../components/images/share.png")} />
+              <Text style={styles.detGameText}>Partager</Text>
+            </TouchableOpacity>
+        </View>
+        <GameCarrousel 
+          games={games}
+          // games={[
+          //   { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
+          // ]} 
+          title="Jeux du même studio →" 
+        />
+        <GameCarrousel 
+          games={games}
+          // games={[
+          //   { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
+          //   { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
+          // ]} 
+          title="Jeux du même genre →" 
+        />
+        <CommentSection/>
+      </ScrollView>
+      <Navbar/>
     </SafeAreaView>
   );
 };
