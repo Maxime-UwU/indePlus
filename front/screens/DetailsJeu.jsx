@@ -38,15 +38,18 @@ const DetailsJeu = ({ route }) => {
   }, []);
 
   const getImageSource = (imageName) => {
-    switch(imageName) {
+    switch (imageName) {
       case './../images/spellswapthumbnail.jpg':
         return spellSwapThumbnail;
       case './../images/Liminascentthumbnail.png':
         return LimanascentThumbnail;
       case './../images/RunetrailGamesLogo.png':
-        return RunetrailLogo
+        return RunetrailLogo;
+      default:
+        return spellSwapThumbnail;
     }
   };
+  
 
   const shareGame = useCallback(async () => {
     try {
