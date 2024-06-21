@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './../components/styles/style';
 import { SafeAreaView, ScrollView, Text, View, Image, TextInput, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import ip from '../Ip';
+import ip from '../Ip';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 

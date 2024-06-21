@@ -11,12 +11,6 @@ export default class NotifService {
       popInitialNotification: true,
       requestPermissions: Platform.OS === 'ios',
     });
-
-    PushNotification.getApplicationIconBadgeNumber((number) => {
-      if (number > 0) {
-        PushNotification.setApplicationIconBadgeNumber(0);
-      }
-    });
   }
 
   // Création d'un channel pour pouvoir récupérer les notifications

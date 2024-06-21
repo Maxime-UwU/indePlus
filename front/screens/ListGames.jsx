@@ -10,7 +10,7 @@ import {
   TextInput,
 } from 'react-native';
 import { SectionedMultiSelect } from 'react-native-sectioned-multi-select';
-//import ip from '../Ip';
+import ip from '../Ip';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -61,7 +61,7 @@ const ListGames = () => {
 
   const getGameData = async () => {
     try {
-      const response = await axios.get('http://10.57.33.155:8000/game');
+      const response = await axios.get(ip + '/game');
       setGames(response.data.gamesData);
     } catch (error) {
         console.error('Error:', error.message);
@@ -70,7 +70,7 @@ const ListGames = () => {
 
   const searchGameData = async () => {
     try {
-      const response = await axios.post('http://10.57.33.155:8000/searchGame', {
+      const response = await axios.post(ip + '/searchGame', {
         name
       });
       setGames(response.data.gamesData);
