@@ -136,9 +136,9 @@ const AddGame = ({ route }) => {
     };
 
     return (
-        <SafeAreaView style={[styles.backgroundStyle, styles.fullPage]}>
+        <SafeAreaView style={styles.backgroundStyle}>
             <ScrollView>
-                <View style={[styles.addGameForm, styles.addMargin]}>
+                <View style={[styles.addGameForm, styles.addMargin,  styles.fullPage]}>
                     <Text style={[styles.labelInput, styles.space]}>Nom</Text>
                     <TextInput defaultValue={name} style={styles.inputStudio} onChangeText={newName => setName(newName)}></TextInput>
                     <View style={styles.alignmentGameImage}>
