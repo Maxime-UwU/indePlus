@@ -63,7 +63,7 @@ const Home = () => {
           <GameCarrousel games={games} title="Vous aimerez peut-être →" />
         </View>
       </ScrollView>
-      {/* <Navbar /> */}
+      <Navbar />
     </SafeAreaView>
   );
 }

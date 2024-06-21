@@ -8,6 +8,7 @@ import teagherStudioThumbnail from '../components/images/teagherStudio.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 import CommentSection from '../components/templates/CommentSection';
+import Navbar from '../components/navbar/Navbar';
 
 const DetailsStudio = ({ route }) => {
   const [games, setGames] = useState(null);
@@ -101,6 +102,7 @@ const studio = []
         />
         <CommentSection/>
       </ScrollView>
+      <Navbar/>
     </SafeAreaView>
   );
 };

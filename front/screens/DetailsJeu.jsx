@@ -9,6 +9,7 @@ import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 import CommentSection from '../components/templates/CommentSection';
+import Navbar from '../components/navbar/Navbar';
 
 const DetailsJeu = ({ route }) => {
   const [games, setGames] = useState(null);
@@ -122,6 +123,7 @@ const DetailsJeu = ({ route }) => {
         />
         <CommentSection/>
       </ScrollView>
+      <Navbar/>
     </SafeAreaView>
   );
 };

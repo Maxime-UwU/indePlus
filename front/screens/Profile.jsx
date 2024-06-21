@@ -17,6 +17,7 @@ import axios from 'axios';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import { useNavigation } from '@react-navigation/native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import Navbar from '../components/navbar/Navbar';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -239,6 +240,7 @@ const getGames = async () => {
             </>
             }
         </ScrollView>
+        <Navbar/>
     </SafeAreaView>
 );
 }

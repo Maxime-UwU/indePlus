@@ -19,6 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
+import Navbar from '../components/navbar/Navbar';
 
 const ListGames = () => {
   const navigation = useNavigation();
@@ -120,6 +121,7 @@ const ListGames = () => {
   }, []);
 
   return (
+    <>
     <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]} keyboardShouldPersistTaps='handled'>
       <View style={styles.searchArea}>
         <View style={styles.searchBarArea}>
@@ -202,6 +204,8 @@ const ListGames = () => {
         scrollEnabled={false}
       />
     </ScrollView>
+    <Navbar/>
+    </>
   );
 }
 

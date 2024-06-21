@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { launchImageLibrary } from 'react-native-image-picker';
+import Navbar from '../components/navbar/Navbar';
 
 const AddGame = ({ route }) => {
     const navigation = useNavigation();
@@ -195,6 +196,7 @@ const AddGame = ({ route }) => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            <Navbar/>
         </SafeAreaView>
     );
 }
