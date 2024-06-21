@@ -78,13 +78,7 @@ const DetailsJeu = ({ route }) => {
     <SafeAreaView style={styles.backgroundStyle}>
       <ScrollView style={[styles.addMargin, styles.fullPage]} nestedScrollEnabled>
         <Image source={getImageSource(game.image)} style={styles.detGameImg} />
-        {Array.isArray(game.studio) ? (
-          game.studio.map(studio => (
-            <Text key={studio.id} style={styles.detGameText}>{studio.name}</Text>
-          ))
-        ) : (
-          <Text style={styles.detGameText}>Studio : {game.studio.name}</Text>
-        )}
+        <Text style={styles.detGameText}>Studio : {game.studio.name}</Text>
         <View style={styles.detGameTagList}>
           <View style={styles.detGameTag}>
             <Text style={styles.detGameTagText}>Tag 1</Text>

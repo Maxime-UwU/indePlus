@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 
 const Routes = () => {
     return (
-        <Stack.Navigator initialRouteName='Liste Jeux'>
+        <Stack.Navigator initialRouteName='Connexion'>
 
             {/* Home */}
 
