@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import { SectionedMultiSelect } from 'react-native-sectioned-multi-select';
 //import ip from '../Ip';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
