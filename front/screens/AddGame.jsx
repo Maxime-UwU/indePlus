@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { launchImageLibrary } from 'react-native-image-picker';
+import Navbar from '../components/navbar/Navbar';
 
 const AddGame = ({ route }) => {
     const navigation = useNavigation();
@@ -135,9 +136,9 @@ const AddGame = ({ route }) => {
     };
 
     return (
-        <SafeAreaView style={[styles.backgroundStyle, styles.fullPage]}>
+        <SafeAreaView style={styles.backgroundStyle}>
             <ScrollView>
-                <View style={[styles.addGameForm, styles.addMargin]}>
+                <View style={[styles.addGameForm, styles.addMargin,  styles.fullPage]}>
                     <Text style={[styles.labelInput, styles.space]}>Nom</Text>
                     <TextInput defaultValue={name} style={styles.inputStudio} onChangeText={newName => setName(newName)}></TextInput>
                     <View style={styles.alignmentGameImage}>
@@ -195,6 +196,7 @@ const AddGame = ({ route }) => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            <Navbar/>
         </SafeAreaView>
     );
 }

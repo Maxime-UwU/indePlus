@@ -9,10 +9,12 @@ import spellSwapThumbnail from '../components/images/spellswapthumbnail.jpg';
 import LimanascentThumbnail from '../components/images/Liminascentthumbnail.png';
 import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 import CommentSection from '../components/templates/CommentSection';
+import Navbar from '../components/navbar/Navbar';
 
 const DetailsJeu = ({ route }) => {
   const [games, setGames] = useState(null);
-  const { game } = route.params;
+  // const { game } = route.params;
+  const game = {name: "", studio : [{name: ""}]}
   const notifServiceRef = useRef(null);
   const message = "Pour le moment, je suis un texte statique mais ca fait déja le café"
 
@@ -27,7 +29,7 @@ const DetailsJeu = ({ route }) => {
 
   useEffect(() => {
     getGameData();
-    notifServiceRef.current = new NotifService(
+    notifServiceRef.current = new NotifService( 
       (token) => console.log('Device Token:', token),
       (notification) => console.log('Notification:', notification)
     );
@@ -65,7 +67,7 @@ const DetailsJeu = ({ route }) => {
     }
   }, [game]);
 
-  // Envoie une notification à l'utilisateur si son appareil est un android (IOS pas encore pris en charge)
+  // Envoie une notification à l'utilisateur si son appareil est un Android (IOS pas encore pris en charge)
   const sendNotification = () => {
     if (Platform.OS === 'android') {
       notifServiceRef.current.localNotif(message);
@@ -73,8 +75,8 @@ const DetailsJeu = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={[styles.backgroundStyle, styles.fullPage]}>
-      <ScrollView style={styles.addMargin} nestedScrollEnabled>
+    <SafeAreaView style={styles.backgroundStyle}>
+      <ScrollView style={[styles.addMargin, styles.fullPage]} nestedScrollEnabled>
         <Image source={getImageSource(game.image)} style={styles.detGameImg} />
         {Array.isArray(game.studio) ? (
           game.studio.map(studio => (
@@ -123,6 +125,7 @@ const DetailsJeu = ({ route }) => {
         />
         <CommentSection/>
       </ScrollView>
+      <Navbar/>
     </SafeAreaView>
   );
 };
