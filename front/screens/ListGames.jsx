@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './../components/styles/style'
 import {
-  SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   View,
   Image,
@@ -91,12 +89,6 @@ const ListGames = () => {
     }
   };
 
-  const data = [
-    { id: 1, name: "Spell Swap", studio: [{ id: 1, name: "Teagher Studio" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 2, name: "Nom du jeu 2", studio: [{ id: 2, name: "Studio 2" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') },
-    { id: 6, name: "Nom du jeu 3", studio: [{ id: 3, name: "Studio 3" }], image: require('./../components/images/spellswapthumbnail.jpg'), plateform: require('./../components/images/windows-icon.png') }
-  ];
-
   // Fonction pour afficher ou cacher les filtres
   const displayFilter = () => {
     if(filterOpen == true) {
@@ -108,13 +100,6 @@ const ListGames = () => {
     }
   }
 
-  // Fonction de recherche avec les filtres sélectionnés
-  const search = () => {
-    console.log(selectedYears, selectedGenres, name); // Les 3 valeurs à ajouter dans la requête
-
-    // Envoi au back et récupération des jeux
-  }
-
   useEffect(() => {
     getGameData();
   }, []);
@@ -123,7 +108,7 @@ const ListGames = () => {
     <ScrollView nestedScrollEnabled style={[styles.fullPage, styles.backgroundStyle]} keyboardShouldPersistTaps='handled'>
       <View style={styles.searchArea}>
         <View style={styles.searchBarArea}>
-          <TouchableOpacity style={styles.filterOpenButton} onPress={displayFilter}>
+          <TouchableOpacity style={styles.filterOpenButton} onPress={displayFilter} testID="filterButton">
             <Image style={styles.icon} source={require("./../components/images/filters.png")} />
           </TouchableOpacity>
           <TextInput
@@ -138,7 +123,7 @@ const ListGames = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={filterArea}>
+      <View style={filterArea} testID="filterArea">
         <SectionedMultiSelect
           items={years}
           IconRenderer={Icon}
@@ -203,6 +188,6 @@ const ListGames = () => {
       />
     </ScrollView>
   );
-}
+};
 
 export default ListGames;
