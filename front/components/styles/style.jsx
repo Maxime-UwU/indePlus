@@ -260,13 +260,13 @@ const styles = StyleSheet.create({
 
   navbar: {
     backgroundColor: '#FAEBD7',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '100%',
     paddingVertical: 10,
-    position: 'absolute',
-    bottom: 0
+    bottom: 0,
+    width: '100%',
   },
   navbarIcon: {
     resizeMode: "contain",

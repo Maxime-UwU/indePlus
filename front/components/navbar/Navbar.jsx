@@ -12,19 +12,19 @@ const Navbar = () => {
 
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity onPress={() => {navigation.navigate('Profile');}} style={styles.gameCard}>
+      <TouchableOpacity onPress={() => {navigation.navigate('Profile');}}>
         <Image style={styles.navbarIcon} source={require('./../images/profil.png')}></Image>
         <Text style={styles.buttonText}>Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {navigation.navigate('ListGames');}} style={styles.gameCard}>
+      <TouchableOpacity onPress={() => {navigation.navigate('ListGames');}}>
         <Image style={styles.navbarIcon} source={require('./../images/game.png')}></Image>
         <Text style={styles.buttonText}>Games</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {navigation.navigate('StudioCarrousel');}} style={styles.gameCard}>
+      <TouchableOpacity onPress={() => {navigation.navigate('StudioCarrousel');}}>
         <Image style={styles.navbarIcon} source={require('./../images/studio.png')}></Image>
         <Text style={styles.buttonText}>Studios</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {navigation.navigate('Home');}} style={styles.gameCard}>
+      <TouchableOpacity onPress={() => {navigation.navigate('Home');}}>
         <Image style={styles.navbarIcon} source={require('./../images/home.png')}></Image>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
