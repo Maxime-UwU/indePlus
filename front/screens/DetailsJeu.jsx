@@ -65,6 +65,7 @@ const DetailsJeu = ({ route }) => {
     }
   }, [game]);
 
+  // Envoie une notification à l'utilisateur si son appareil est un android (IOS pas encore pris en charge)
   const sendNotification = () => {
     if (Platform.OS === 'android') {
       notifServiceRef.current.localNotif(message);
