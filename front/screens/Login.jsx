@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './../components/styles/style';
 import { SafeAreaView, ScrollView, Text, View, Image, TextInput, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ip from '../Ip';
+//import ip from '../Ip';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -23,7 +23,7 @@ const Login = () => {
       navigation.navigate('Bienvenue');
     } catch (err) {
       console.error('Error during login:', err); // Logguez l'erreur de manière plus détaillée
-      setError('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
+      console.log('Une erreur est survenue lors de la connexion.'); // Utilisez setError pour gérer l'erreur dans votre composant
     }
   };
 
@@ -54,4 +54,3 @@ const Login = () => {
 }
 
 export default Login;
-

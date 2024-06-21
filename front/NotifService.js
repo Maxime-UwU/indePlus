@@ -4,8 +4,7 @@ export default class NotifService {
   constructor(onRegister, onNotification) {
     this.lastId = 0;
 
-    this.createDefaultChannels();
-
+    // paramétrages global des notifications
     PushNotification.configure({
       onRegister: onRegister,
       onNotification: onNotification,
@@ -13,7 +12,6 @@ export default class NotifService {
       requestPermissions: Platform.OS === 'ios',
     });
 
-    // Clear badge number at start
     PushNotification.getApplicationIconBadgeNumber((number) => {
       if (number > 0) {
         PushNotification.setApplicationIconBadgeNumber(0);
@@ -21,6 +19,7 @@ export default class NotifService {
     });
   }
 
+  // Création d'un channel pour pouvoir récupérer les notifications
   createDefaultChannels() {
     PushNotification.createChannel(
       {
@@ -33,6 +32,7 @@ export default class NotifService {
     );
   }
 
+  // Paramétrage de la notification
   localNotif(message) {
     this.lastId++;
     PushNotification.localNotification({
@@ -41,10 +41,7 @@ export default class NotifService {
       largeIcon: 'ic_launcher', 
       smallIcon: 'ic_notification', 
       bigText: message, 
-      // subText: 'Je suis aussi un texte statique', 
       color: 'red', 
-            // vibrate: true, 
-      // vibration: 100, 
       vibrate: false,
       invokeApp: true, 
 
