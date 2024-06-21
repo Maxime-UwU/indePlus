@@ -81,8 +81,8 @@ const studio = []
 
 
   return (
-    <SafeAreaView style={[styles.backgroundStyle, styles.fullPage]}>
-      <ScrollView style={styles.addMargin} nestedScrollEnabled>
+    <SafeAreaView style={styles.backgroundStyle}>
+      <ScrollView style={[styles.addMargin, styles.fullPage]} nestedScrollEnabled>
         <Image source={getImageSource(studio.image)} style={styles.detGameImg} />
         <Text style={styles.detGameDescription}>{studio.description}</Text>
         <View style={styles.socialLinks}>
