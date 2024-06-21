@@ -18,7 +18,7 @@ const DetailsJeu = ({ route }) => {
 
   const getGameData = async () => {
     try {
-      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/sameStudioGame');
+      const response = await axios.get(ip + '/sameStudioGame');
       setGames(response.data.gamesData);
     } catch (error) {
         console.error('Error:', error.message);

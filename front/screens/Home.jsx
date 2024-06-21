@@ -20,7 +20,7 @@ const Home = () => {
   // Fonction pour récupérer les données des studios
   const getStudioData = async () => {
     try {
-      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/studio');
+      const response = await axios.get(ip + '/studio');
       setStudios(response.data.studiosData);
     } catch (error) {
       console.error('Error:', error.message);
@@ -30,7 +30,7 @@ const Home = () => {
   // Fonction pour récupérer les données des derniers jeux
   const getLatestGameData = async () => {
     try {
-      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/latestGame');
+      const response = await axios.get(ip + '/latestGame');
       setLatestGames(response.data.latestGamesData);
     } catch (error) {
       console.error('Error:', error.message);
@@ -40,7 +40,7 @@ const Home = () => {
   // Fonction pour récupérer les données des jeux
   const getGameData = async () => {
     try {
-      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/game');
+      const response = await axios.get(ip + '/game');
       setGames(response.data.gamesData);
     } catch (error) {
       console.error('Error:', error.message);
