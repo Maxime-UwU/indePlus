@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { NavigationContainer } from '@react-navigation/native';
+import ip from '../Ip';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   setItem: jest.fn(),
@@ -45,7 +46,7 @@ describe('Login Screen', () => {
   });
 
   it('calls handleLogin on button press and stores token', async () => {
-    mock.onPost('http://10.57.33.155:8000/login').reply(200, { token: 'testtoken' });
+    mock.onPost(ip + '/login').reply(200, { token: 'testtoken' });
 
     const { getByPlaceholderText, getByText } = render(
       <NavigationContainer>
@@ -66,7 +67,7 @@ describe('Login Screen', () => {
   });
 
   it('displays an error message on login failure', async () => {
-    mock.onPost('http://10.57.33.155:8000/login').reply(400, { message: 'Invalid credentials' });
+    mock.onPost(ip + '/login').reply(400, { message: 'Invalid credentials' });
 
     const { getByPlaceholderText, getByText, findByText } = render(
       <NavigationContainer>
