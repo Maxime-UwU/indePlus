@@ -183,7 +183,7 @@ const ListGames = () => {
       <FlatList
         data={games}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => { navigation.navigate('DetailsJeu', { game: item }); }} style={styles.gameListCard}>
+          <TouchableOpacity onPress={() => { navigation.navigate('Details Jeu', { game: item }); }} style={styles.gameListCard}>
             <Image style={styles.imageListCard} source={getImageSource(item.image)} />
 
             <View>

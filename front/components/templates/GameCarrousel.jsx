@@ -23,13 +23,15 @@ const GameCarrousel = props => {
       case './../images/Liminascentthumbnail.png':
         return LimanascentThumbnail;
       case './../images/RunetrailGamesLogo.png':
-        return RunetrailLogo
+        return RunetrailLogo;
       case './../components/images/spellswapthumbnail.jpg':
         return spellSwapThumbnail;
       case './../components/images/Liminascentthumbnail.png':
         return LimanascentThumbnail;
       case './../components/images/RunetrailGamesLogo.png':
-        return RunetrailLogo
+        return RunetrailLogo;
+      default:
+        return spellSwapThumbnail;
     }
   };
 
@@ -50,15 +52,14 @@ const GameCarrousel = props => {
           horizontal
           data={props.games}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => {navigation.navigate('Details Jeu', {game: item} );}} style={styles.gameCard}>
-              <Image style={styles.imageCard} source={getImageSource(item.image)}/>
+            <TouchableOpacity onPress={() => {navigation.navigate('Details Jeu', { game: item });}} style={styles.gameCard}>
+              <Image style={styles.imageCard} source={getImageSource(item.image)} />
               <Text style={styles.titleCard}>{item.name}</Text>
               {item.studio.map(studio => (
                 <Text key={studio.id} style={styles.textCard} numberOfLines={2}>{studio.name}</Text>
               ))}
               <View style={styles.line}>
-                <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image>
-                {/* <Image style={styles.logoCard} source={getPlateformSource(item.plateform)}></Image> */}
+                <Image style={styles.logoCard} source={getPlateformSource(item.plateform)} />
               </View>
             </TouchableOpacity>
           )}
@@ -67,7 +68,7 @@ const GameCarrousel = props => {
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
 export default GameCarrousel;
