@@ -17,6 +17,7 @@ import axios from 'axios';
 import StudioCarrousel from '../components/templates/StudioCarrousel';
 import { useNavigation } from '@react-navigation/native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import Navbar from '../components/navbar/Navbar';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -28,14 +29,9 @@ const Profile = () => {
   var facebook = ""
   var instagram = ""
   var youtube = ""
-  var count = 0
-  var user = { role: "STUDIO" }
+  var user = { role: "USER" }
+  var nom = "Test User"
 
-  const [nom, setNom] = useState("Test") // il faudrait qu'il y ait le nom de l'utilisateur par defaut ici
-  const [name, setName] = useState(styles.profileModifyImage)
-  const [nameInput, setNameInput] = useState(styles.hiddenProfileModifyImage)
-  const [nameLabel, setNameLabel] = useState(styles.text)
-  const [input, setInput] = useState(styles.hiddenfield)
   const [notif, setNotif] = useState(false); // Il faudrait le booleen notification ici
   const [games, setGames] = useState(null);
   const [studios, setStudios] = useState(null);
@@ -80,28 +76,6 @@ const Profile = () => {
         });
     }
 
-  const displayInput = () => {
-    setInput(styles.input)
-    setName(styles.hiddenProfileModifyImage)
-    setNameInput(styles.profileModifyImage)
-    setNameLabel(styles.hiddenfield)
-  }
-
-  const hideInput = () => {
-
-    // Modification du nom dans la bdd ici
-
-    setInput(styles.hiddenfield)
-    setName(styles.profileModifyImage)
-    setNameInput(styles.hiddenProfileModifyImage)
-    setNameLabel(styles.text)
-  }
-
-  function updateInputValue () {
-    console.log(inputName.value)
-    setNom(inputName.value)
-  }
-
   const toggleSwitch = () => {
     setNotif(previousState => !previousState);
     // Ajout du bouleen dans la bdd
@@ -109,7 +83,7 @@ const Profile = () => {
 
 const getGames = async () => {
     try {
-      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/game'); // mettre le filtre favoris ici
+      const response = await axios.get(ip + '/game'); // mettre le filtre favoris ici
       setGames(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
@@ -122,7 +96,7 @@ const getGames = async () => {
 
   const getStudios = async () => {
     try {
-      const response = await axios.get('https://132d-92-174-83-81.ngrok-free.app/studio');
+      const response = await axios.get(ip + '/studio');
       setStudios(response.data);
     } catch (error) {
       if (error.response && error.response.data) {
@@ -239,6 +213,7 @@ const getGames = async () => {
             </>
             }
         </ScrollView>
+        <Navbar/>
     </SafeAreaView>
 );
 }
