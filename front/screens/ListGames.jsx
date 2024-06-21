@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './../components/styles/style'
+import styles from './../components/styles/style';
 import {
   ScrollView,
   Text,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { SectionedMultiSelect } from 'react-native-sectioned-multi-select';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import ip from '../Ip';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -126,7 +126,7 @@ const ListGames = () => {
         </View>
       </View>
       <View style={filterArea} testID="filterArea">
-        <SectionedMultiSelect
+      <SectionedMultiSelect
           items={years}
           IconRenderer={Icon}
           uniqueKey="id"
