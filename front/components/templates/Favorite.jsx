@@ -77,9 +77,9 @@ const Favorite = ({ id }) => {
       });
       const status = response.data.status;
       if (status === "success"){
-        setFavorite(require("./../images/nostar.png"));
-      } else if (status === "error"){
         setFavorite(require("./../images/star.png"));
+      } else if (status === "error"){
+        setFavorite(require("./../images/nostar.png"));
       }    } catch (error){
       console.error('Error:', error.message);
     }
