@@ -1,0 +1,5 @@
+kreait_firebase:
+    projects:
+        default:
+            credentials: '%kernel.project_dir%/config/firebase/indeplus-a82f0-firebase-adminsdk-y3ixs-34ba0d705a.json'
+            database_uri: 'mysql://root:root@127.0.0.1:8889/indePlus?serverVersion=5.7.39&charset=utf8mb4'

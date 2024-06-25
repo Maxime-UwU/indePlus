@@ -8,8 +8,36 @@ import {
 import Routes from './Routes';
 import {NavigationContainer} from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
+import axios from 'axios';
+import ip from './Ip';
 
 const App: React.FC = () => {
+
+  async function requestUserPermissionNotif() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+        const token = await messaging().getToken();
+        console.log('FCM token:', token);
+        // return token;
+        try {
+          const response = await axios.post(ip + '/send-notification', {
+            token,
+          });
+          console.log("hello !");
+        } catch (err) {
+          console.log("error");
+        }
+
+    } else {
+        console.log('User declined or has not granted permission');
+        return null;
+    }
+}
+
   useEffect(() => {
     const requestNotificationPermission = async () => {
       try {
@@ -40,9 +68,9 @@ const App: React.FC = () => {
       console.log('Message handled in the background!', remoteMessage);
     });
 
-    requestUserPermission();
-
-    requestNotificationPermission();
+    // requestUserPermission();
+    requestUserPermissionNotif();
+    // requestNotificationPermission();
   }, []);
 
   return (
