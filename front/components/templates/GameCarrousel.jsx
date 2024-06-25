@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './../styles/style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   Text,
   View,
@@ -52,7 +54,7 @@ const GameCarrousel = props => {
           horizontal
           data={props.games}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => {navigation.navigate('Details Jeu', { game: item });}} style={styles.gameCard}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Details Jeu', {id: item.id}, { game: item });}} style={styles.gameCard}>
               <Image style={styles.imageCard} source={getImageSource(item.image)} />
               <Text style={styles.titleCard}>{item.name}</Text>
               {item.studio.map(studio => (

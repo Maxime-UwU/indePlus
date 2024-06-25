@@ -21,6 +21,18 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function findFavGameByUserAndGameId(int $userId, int $gameId)
+    {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.favGames', 'g')
+            ->where('u.id = :userId')
+            ->andWhere('g.id = :gameId')
+            ->setParameter('userId', $userId)
+            ->setParameter('gameId', $gameId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

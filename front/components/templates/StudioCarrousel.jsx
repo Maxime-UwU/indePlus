@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './../styles/style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   Text,
   View,
@@ -31,7 +33,7 @@ const StudioCarrousel = props => {
       horizontal
       data={props.studios}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => {navigation.navigate('Details Studio', {studio: item} );}} style={styles.studioCard}>
+        <TouchableOpacity onPress={() => {navigation.navigate('Details Studio', {id: item.id},  {studio: item} );}} style={styles.studioCard}>
           <Image style={styles.imageCard} source={getImageSource(item.image)}></Image>
           <Text style={styles.titleCard}>{item.name}</Text>
           <Text numberOfLines={2} style={styles.textCard}>{item.description}</Text>

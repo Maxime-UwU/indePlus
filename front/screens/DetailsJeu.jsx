@@ -10,8 +10,10 @@ import RunetrailLogo from '../components/images/RunetrailGamesLogo.png';
 import CommentSection from '../components/templates/CommentSection';
 import Navbar from '../components/navbar/Navbar';
 import GameCarrousel from '../components/templates/GameCarrousel';
+import Favorite from '../components/templates/Favorite'; // Importez votre composant Favorite
 
 const DetailsJeu = ({ route }) => {
+  const { id } = route.params; // Récupérez l'ID du jeu depuis les paramètres de la route
   const [games, setGames] = useState([]);
   const game = { name: "", studio: [{ name: "" }] };
   const notifServiceRef = useRef(null);
@@ -38,14 +40,14 @@ const DetailsJeu = ({ route }) => {
 
   const getImageSource = (imageName) => {
     switch (imageName) {
-      case './../images/spellswapthumbnail.jpg':
+      case 'spellSwapThumbnail':
         return spellSwapThumbnail;
-      case './../images/Liminascentthumbnail.png':
+      case 'LiminascentThumbnail':
         return LimanascentThumbnail;
-      case './../images/RunetrailGamesLogo.png':
+      case 'RunetrailGamesLogo':
         return RunetrailLogo;
       default:
-        return spellSwapThumbnail;
+        return spellSwapThumbnail; // Fallback au cas où aucun des cas ne correspond
     }
   };
 
@@ -89,13 +91,6 @@ const DetailsJeu = ({ route }) => {
   const renderHeader = () => (
     <>
       <Image source={getImageSource(game.image)} style={styles.detGameImg} />
-      {Array.isArray(game.studio) ? (
-        game.studio.map(studio => (
-          <Text key={studio.id} style={styles.detGameText}>{studio.name}</Text>
-        ))
-      ) : (
-        <Text style={styles.detGameText}>Studio : {game.studio.name}</Text>
-      )}
       <View style={styles.detGameTagList}>
         <View style={styles.detGameTag}>
           <Text style={styles.detGameTagText}>Tag 1</Text>
@@ -121,49 +116,25 @@ const DetailsJeu = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <ScrollView style={[styles.addMargin, styles.fullPage]} nestedScrollEnabled>
-        <Image source={getImageSource(game.image)} style={styles.detGameImg} />
-        <Text style={styles.detGameText}>Studio : {game.studio.name}</Text>
-        <View style={styles.detGameTagList}>
-          <View style={styles.detGameTag}>
-            <Text style={styles.detGameTagText}>Tag 1</Text>
-          </View>
-          <View style={styles.detGameTag}>
-            <Text style={styles.detGameTagText}>Tag 2</Text>
-          </View>
-        </View>
-        <Text style={styles.detGameText}>Sortie : {game.release_date}</Text>
-        <Text style={styles.detGameDescription}>{game.description}</Text>
-        <View style={styles.socialLinks}>
-          <TouchableOpacity onPress={sendNotification} style={styles.socialText}>
-          <Image style={styles.socialLink} source={require("./../components/images/download.png")} />
-              <Text style={styles.detGameText}>Télécharger</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={shareGame} style={styles.socialText}>
-              <Image style={styles.socialLink} source={require("./../components/images/share.png")} />
-              <Text style={styles.detGameText}>Partager</Text>
-            </TouchableOpacity>
-        </View>
-        <GameCarrousel 
-          games={games}
-          // games={[
-          //   { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
-          //   { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
-          //   { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
-          // ]} 
-          title="Jeux du même studio →" 
-        />
-        <GameCarrousel 
-          games={games}
-          // games={[
-          //   { id: 1, name: "Spell Swap", studio: [{id: 1, name: "Teagher Studio"}], image: './../components/images/spellswapthumbnail.jpg' },
-          //   { id: 2, name: "Nom du jeu 2", studio: [{id: 2, name: "Studio 2"}], image: './../components/images/spellswapthumbnail.jpg' },
-          //   { id: 3, name: "Nom du jeu 3", studio: [{id: 3, name: "Studio 3"}], image: './../components/images/spellswapthumbnail.jpg' }
-          // ]} 
-          title="Jeux du même genre →" 
-        />
-        <CommentSection/>
-      </ScrollView>
+      <FlatList
+        data={[]}
+        ListHeaderComponent={renderHeader}
+        ListEmptyComponent={null}
+        renderItem={null}
+        ListFooterComponent={() => (
+          <>
+            <GameCarrousel 
+              games={games}
+              title="Jeux du même studio →" 
+            />
+            <GameCarrousel 
+              games={games}
+              title="Jeux du même genre →" 
+            />
+            <CommentSection/>
+          </>
+        )}
+      />
       <Navbar/>
     </SafeAreaView>
   );
