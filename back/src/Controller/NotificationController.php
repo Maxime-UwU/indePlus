@@ -35,6 +35,12 @@ class NotificationController extends AbstractController
         $token = $data['token'];
 
         $message = [
+            "to" => "device-token",
+            'notification' => [
+                "title"=> "Hello",
+                    "body"=> "World",
+
+            ],
             'notification' => [
                 'title' => 'Hello',
                 'body' => 'World'
