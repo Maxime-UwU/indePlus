@@ -24,6 +24,7 @@ const ListGames = () => {
 
   const [selectedYears, setSelectedYears] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [tags, setTags] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterArea, setFilterArea] = useState(styles.hiddenFilterArea);
   const [name, setName] = useState("")
@@ -68,6 +69,15 @@ const ListGames = () => {
     }
   };
 
+  const getTags = async () => {
+    try {
+      const response = await axios.get(ip + '/tag');
+      setTags(response.data.tagsData);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+  };
+
   const searchGameData = async () => {
     try {
       const response = await axios.post(ip + '/searchGame', {
@@ -103,6 +113,7 @@ const ListGames = () => {
 
   useEffect(() => {
     getGameData();
+    getTags();
   }, []);
 
   return (
@@ -148,9 +159,9 @@ const ListGames = () => {
           alwaysShowSelectText={true}
         />
         <SectionedMultiSelect
-          items={genres}
+          items={tags}
           IconRenderer={Icon}
-          uniqueKey="idGenre"
+          uniqueKey="id"
           selectText="Filtre par genres"
           selectedText="choisie(s)"
           searchPlaceholderText="Chercher un genre"
@@ -172,8 +183,9 @@ const ListGames = () => {
       <FlatList
         data={games}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => { navigation.navigate('Details Jeu', { game: item }); }} style={styles.gameListCard}>
+          <TouchableOpacity onPress={() => { navigation.navigate('Details Jeu', {id: item.id}, { game: item }); }} style={styles.gameListCard}>
             <Image style={styles.imageListCard} source={getImageSource(item.image)} />
+
             <View>
               <Text style={styles.titleCard}>{item.name}</Text>
               {item.studio.map(studio => (

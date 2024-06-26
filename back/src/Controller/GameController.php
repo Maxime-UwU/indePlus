@@ -18,8 +18,8 @@ class GameController extends AbstractController
 
         $latestGamesData = [];
 
-        if ($latestGames !== null){
-            foreach($latestGames as $latestGame){
+        if ($latestGames !== null) {
+            foreach ($latestGames as $latestGame) {
                 $studios = [];
                 foreach ($latestGame->getStudio() as $studio) {
                     $studios[] = [
@@ -50,7 +50,7 @@ class GameController extends AbstractController
 
         $gamesData = [];
 
-        if ($games !== null){
+        if ($games !== null) {
             foreach ($games as $game) {
                 $studios = [];
                 foreach ($game->getStudio() as $studio) {
@@ -59,7 +59,7 @@ class GameController extends AbstractController
                         'name' => $studio->getName(),
                     ];
                 }
-    
+
                 $gamesData[] = [
                     'id' => $game->getId(),
                     'name' => $game->getName(),
@@ -82,7 +82,7 @@ class GameController extends AbstractController
 
         $gamesData = [];
 
-        if ($games !== null){
+        if ($games !== null) {
             foreach ($games as $game) {
                 $studios = [];
                 foreach ($game->getStudio() as $studio) {
@@ -91,7 +91,7 @@ class GameController extends AbstractController
                         'name' => $studio->getName(),
                     ];
                 }
-    
+
                 $gamesData[] = [
                     'id' => $game->getId(),
                     'name' => $game->getName(),
@@ -108,44 +108,44 @@ class GameController extends AbstractController
     }
 
     #[Route('/searchGame', name: 'app_searchGame')]
-public function searchGames(Request $request, EntityManagerInterface $entityManager): JsonResponse
-{
-    $data = json_decode($request->getContent(), true);
+    public function searchGames(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
 
-    $name = $data['name'] ?? '';
+        $name = $data['name'] ?? '';
 
-    $queryBuilder = $entityManager->getRepository(Game::class)->createQueryBuilder('g');
-    $queryBuilder->where('g.name LIKE :name')
-                 ->setParameter('name', '%' . $name . '%');
+        $queryBuilder = $entityManager->getRepository(Game::class)->createQueryBuilder('g');
+        $queryBuilder->where('g.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%');
 
-    $games = $queryBuilder->getQuery()->getResult();
+        $games = $queryBuilder->getQuery()->getResult();
 
-    $gamesData = [];
+        $gamesData = [];
 
-    if ($games !== null) {
-        foreach ($games as $game) {
-            $studios = [];
-            foreach ($game->getStudio() as $studio) {
-                $studios[] = [
-                    'id' => $studio->getId(),
-                    'name' => $studio->getName(),
+        if ($games !== null) {
+            foreach ($games as $game) {
+                $studios = [];
+                foreach ($game->getStudio() as $studio) {
+                    $studios[] = [
+                        'id' => $studio->getId(),
+                        'name' => $studio->getName(),
+                    ];
+                }
+
+                $gamesData[] = [
+                    'id' => $game->getId(),
+                    'name' => $game->getName(),
+                    'image' => $game->getImage(),
+                    'plateform' => $game->getPlateform(),
+                    'description' => $game->getDescription(),
+                    'studio' => $studios,
                 ];
             }
-
-            $gamesData[] = [
-                'id' => $game->getId(),
-                'name' => $game->getName(),
-                'image' => $game->getImage(),
-                'plateform' => $game->getPlateform(),
-                'description' => $game->getDescription(),
-                'studio' => $studios,
-            ];
         }
-    }
 
-    return new JsonResponse([
-        'gamesData' => $gamesData,
-    ]);
-}
+        return new JsonResponse([
+            'gamesData' => $gamesData,
+        ]);
+    }
 
 }
