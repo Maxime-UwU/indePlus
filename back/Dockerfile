@@ -1,8 +1,5 @@
 # Utiliser une image PHP 8.2
-FROM php:8.2-fpm
-
-# Définir le répertoire de travail
-WORKDIR /var/www/html
+FROM php:8.2-cli
 
 # Installer les dépendances système nécessaires
 RUN apt-get update && \
@@ -17,6 +14,9 @@ RUN apt-get update && \
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Définir le répertoire de travail
+WORKDIR /var/www/html
+
 # Copier les fichiers composer.json et composer.lock
 COPY composer.json composer.lock ./
 
@@ -25,10 +25,13 @@ RUN composer install --no-scripts --no-autoloader
 
 # Copier le reste de l'application backend
 COPY . .
+RUN cp .fly/FlySymfonyRuntime.php /var/www/html/src/FlySymfonyRuntime.php
+
+# Compiler les assets (le cas échéant)
+RUN composer dump-autoload --optimize
 
 # Exposer le port de l'application si nécessaire
-# EXPOSE 8080
+EXPOSE 8080
 
 # Démarrer l'application backend
-CMD ["php-fpm"]
-
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
