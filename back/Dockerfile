@@ -1,37 +1,37 @@
-# Utiliser une image PHP 8.2
-FROM php:8.2-cli
+# Utiliser une image PHP 8.2 avec Apache
+FROM php:8.2-apache
 
-# Installer les dépendances système nécessaires
-RUN apt-get update && \
-    apt-get install -y \
-        git \
-        unzip \
-        libpq-dev \
-        libzip-dev \
-        zip \
-        && docker-php-ext-install pdo pdo_mysql zip
+# Installer les dépendances système nécessaires et PHP extensions
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    libpq-dev \
+    git \
+    unzip \
+    libsodium-dev \
+    && docker-php-ext-install intl pdo pdo_pgsql sodium \
+    && apt-get clean
 
 # Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Copier les fichiers composer.json et composer.lock
-COPY composer.json composer.lock ./
-
-# Installer les dépendances
-RUN composer install --no-scripts --no-autoloader
-
-# Copier le reste de l'application backend
+# Copier les fichiers de l'application dans le conteneur
 COPY . .
-RUN cp .fly/FlySymfonyRuntime.php /var/www/html/src/FlySymfonyRuntime.php
 
-# Compiler les assets (le cas échéant)
-RUN composer dump-autoload --optimize
+# Installer les dépendances PHP
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-# Exposer le port de l'application si nécessaire
-EXPOSE 8080
+# Configurer Apache
+RUN a2enmod rewrite
+COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 
-# Démarrer l'application backend
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
+# Définir l'entrée du conteneur
+CMD ["apache2-foreground"]
+
+
+
+
+
+
