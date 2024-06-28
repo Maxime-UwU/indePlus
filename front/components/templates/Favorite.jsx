@@ -6,14 +6,14 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import ip from '../../Ip';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from 'jwt-decode';
 
 const Favorite = ({ id }) => {
   const navigation = useNavigation();
+  const route = useRoute();
   const [isFavorite, setIsFavorite] = useState(false);
   const [favorite, setFavorite] = useState(require("./../images/nostar.png"));
   const [gameId, setGameId] = useState();
@@ -23,14 +23,11 @@ const Favorite = ({ id }) => {
     setFavoriteLoad();
     // getJwtToken();
     setJwtUserId('1');
-    setGameId(id);
+    setGameId(route.params?.id);
     checkFavorite();
-  }, []);
-
-
+  }, [route.params?.id]);
 
   const setFavoriteLoad = () => {
-    // Récupération du statut favori
   };
 
   // const getJwtToken = async () => {
@@ -53,6 +50,7 @@ const Favorite = ({ id }) => {
 
   const changeFavorite = async () => {
     try {
+      console.log(gameId)
       const response = await axios.post('http://10.57.33.155:8000/changeFav', {
         gameId,
         jwtUserId,

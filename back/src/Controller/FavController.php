@@ -16,8 +16,11 @@ class FavController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
 
+        $data = json_decode($request->getContent(), true);
+
         $userId = 1;
-        $gameId = 2;
+        // $gameId = 2;
+        $gameId = $data['gameId'];
 
         $user = $entityManager->getRepository(User::class)->find($userId);
         $game = $entityManager->getRepository(Game::class)->find($gameId);
